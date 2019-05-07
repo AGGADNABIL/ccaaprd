@@ -1,0 +1,64 @@
+
+  <!--POPULAR JOB CATEGPRIES END--> 
+  <!--MAIN START-->
+  <div id="main">     
+    <!--RECENT JOB SECTION START-->
+    <section class="recent-row padd-tb job-detail" ng-controller="offresDetailController">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-sm-8">
+            <div id="content-area">
+              <div class="box">
+              <!--  <div class="thumb"><a href="#"><img src="images/OFFRE.jpg" size="70x13" alt="img"></a></div>-->
+                <div class="text-col">
+                  <h2><a href="">{{offre.titre}}</</a></h2>
+                  <a href="" class="text"><i class="fa fa-map-marker"></i>{{offre.ville.nomVille}}	</a> <a href="" class="text"><i class="fa fa-calendar"></i>{{offre.datePublication | date:'dd MMMM yyyy'}}</</a>
+                  <div class="clearfix"> <a href=""  ng-click="search(offre.typeContrat.titre,null,null)"  class="btn-freelance">{{offre.typeContrat.titre}}</a> <a href="" ng-click="apply()"  class="btn-style-1">Postuler à cette offre</a> </div>
+                </div>
+                <div class="clearfix">
+                  <h4>Description du Poste :</h4>
+                  <p><span ng-bind-html="offre.poste | unsafe"></span></p>
+                  <h4>Profils Recherché :</h4>
+                  <p><span ng-bind-html="offre.profilRecherche | unsafe"></span>    </p>
+                 
+                <div  class="tags" > 
+	                <span ng-repeat="tag in comptenceTags" ng-show="tag.offre.codeOffre == offre.codeOffre" >
+	                	<a href="" ng-click="search(null,null,tag.competence.titre)"><i class="fa fa-tags"></i>{{tag.competence.titre}}</a> 
+	                </span>
+                </div>
+                 
+                  <a href="" ng-click="apply()"  class="btn-style-1 ">Postuler à cette offre</a> </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-4">
+            <aside>
+              <div class="sidebar">
+              <div class="box">
+                  <div class="frame"> <a href="#"><img src="images/caplogo.png" alt="img"></a>
+                  </div>
+                  <div class="text-box">
+                    <h4><a href="#">CapValue</a></h4>
+                    <p>CapValue vous propose les meilleurs freelances disponibles sur le marché de l’informatique.
+						</p>
+						<strong>Freelancers</strong>
+						<p>En tant que freelance, vous n’avez pas le temps d’être votre propre force commerciale. CapValue intervient dans ce cadre 
+						</p>
+						
+						
+						<strong>coordonnées</strong>
+						<p>29, Rue de Bapaume, Espace EL Manar. Bvd Med V Casablanca Maroc Tél : (+212) 5 22 24 03 53 Fax : (+212) 5 22 24 03 58</p>
+
+                    </div>
+                </div>
+              
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--RECENT JOB SECTION END--> 
+  </div>
+  <!--MAIN END--> 
+  

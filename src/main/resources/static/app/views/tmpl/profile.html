@@ -1,0 +1,209 @@
+<style type="text/css">
+.conteneur {
+	float: right;
+	display: block;
+}
+
+label {
+	margin-right: 5px;
+}
+
+.picture {
+	max-width: 140px;
+	max-height: 160px;
+	border-radius: 10px;
+	/*border: 1px dotted #ccc;*/
+	overflow: hidden;
+}
+
+form#upload-file-form {
+	border-radius: 10px;
+	padding: 10px auto !important;
+	width: 250px;
+}
+
+.pic {
+	width: 140px;
+	height: 100;
+	border-radius: 10px;
+	/*border: 1px dotted #ccc;*/
+}
+</style>
+<!--MAIN START-->
+<div id="main">
+	<!--RECENT JOB SECTION START-->
+	<section class="resumes-section padd-tb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="resumes-content">
+						<h2>Mes informations Personnelles</h2>
+
+						<div class="box">
+
+							<!-- e:/capvalue/CapRecrute/src/main/resources/static/app/apps/upload/{{candidat.photo}} -->
+							<div class="frame">
+								<form id="upload-file-form" role="form">
+									<div class=" form-group picture">
+										<img check-image ng-src="fileUpload/{{$storage.candidat.photo }}"
+											alt="img" class="pic">
+										<!--           /uploadFile      fileUpload/  -->
+
+									</div>
+									<br />
+									<div>
+										<div class="upload-box">
+											<div class="hold">
+												<a href="#">Max size 2MB</a> <span style="float: right;"
+													class="btn-file"> Parcourir <input
+													id="upload-file-input" type="file" name="uploadfile"
+													accept="*" />
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="btn-row">
+												<a
+													style="margin: 0px 4px; padding: 5px auto; padding-top: 14px; padding-bottom: 14px;"
+													class="resume" href="" ng-click="loadpage()">télécharger
+													le fichier</a>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div id="infos" class="text-box">
+								<h4>{{$storage.candidat.nom +' '+ $storage.candidat.prenom }}</h4>
+								<h3 style="text-transform:capitalize;font-weight:bold;">{{ $storage.candidat.profil }}</h3>
+								<div class="clearfix">
+									<strong><label>Expérience : </label>{{$storage.candidat.niveauExperience}}</strong>
+								</div>
+								<div class="clearfix">
+									<strong><label>Situation actuelle : </label>{{$storage.candidat.situationActuelle
+										}}</strong>
+								</div>
+								<div class="clearfix">
+									<strong><label>GSM : </label>{{$storage.candidat.telephone }}</strong>
+								</div>
+
+								<div class="clearfix">
+									<strong><label>Date de naissance : </label>{{$storage.candidat.dateNaiss
+										}}</strong>
+								</div>
+								<div class="clearfix">
+									<strong><label>Pays : </label>{{$storage.candidat.nationalite
+										}}</strong>
+								</div>
+								<div class="clearfix">
+									<strong><label>Ville : </label>{{$storage.candidat.adresse }}</strong>
+								</div>
+								<!-- <div class="clearfix">
+									<strong><label>Email : </label>{{candidat.username
+										}}</strong>
+								</div>
+								
+								<div class="clearfix">
+									<strong><i class="fa fa-map-marker"></i>{{candidat.adresse}}</strong>
+									<strong><i class="fa fa-globe"></i><a href="#">{{
+											candidat.username}}</a></strong>
+								</div> -->
+								<!-- <span class="price"><i class="fa fa-money"></i>{{
+									candidat.salaire | currency: 'Dh ' }}</span> -->
+								<hr>
+								<h4 ng-click="getCondidat()">Détails :</h4>
+								<div class="clearfix">
+									<strong><label>Niveau d'études : </label>{{$storage.candidat.niveauEtude
+										}}</strong>
+								</div>
+								<div class="clearfix">
+									<strong><label>Date de disponibilité : </label>{{$storage.candidat.dateDisponibilite
+										}}</strong>
+								</div>
+								<!-- <div class="clearfix">
+									<strong><label>Type-Salaire : </label>{{candidat.typeSalaire
+										}}</strong>
+								</div> -->
+								<div class="clearfix">
+									<strong><label>Fichier joints : </label> <a href=""
+										ng-click="download()">{{ $storage.candidat.cv }}</a></strong>
+								</div>
+								<hr />
+								<div class="conteneur">
+									<div class="btn-row">
+									
+										<a ui-sref="app.editprofil" class="resume"><i
+											class="fa fa-file-text-o"></i>Editer</a>
+									</div>
+									<br>
+								</div>
+								<br>
+                                <!-- <a href=""  id="disablingEmail" onclick="javascript:disableEmail('simotmart@gmail.com')">Desinscrire</a> -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!--RECENT JOB SECTION END-->
+	<!-- EDIT INFORMATION -->
+</div>
+<script>
+	$(document).ready(function() {
+		// pour faire un click sur bouton submit
+		/* $("#upload-file-form")
+				.submit(uploadFile); */
+		// pour changement d'etat 
+		$("#upload-file-input").on("change", uploadFile);
+	
+		/* $("#disablingEmail").click(function (){
+			disableEmail('simotmart@gmail.com');
+			console.log('operation effectuée');
+		})	 */
+	});
+
+	function uploadFile() {
+		$.ajax({
+			url : "/uploadFile", //    /recruteCapvalue
+			type : "POST",
+			data : new FormData($("#upload-file-form")[0]),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				// Handle upload success
+				$("#upload-file-message").text();
+				console.log('bien upload');
+				//"File succesfully uploaded");
+			},
+			error : function() {
+				// Handle upload error
+				$("#upload-file-message").text();
+				console.log('failer upload');
+				//	"File not uploaded (perhaps it's too much big)");
+			}
+		});
+	} // function uploadFile
+
+	//disable receive email
+	
+	function disableEmail(str){
+		$.ajax({
+			url : "/subscribes/desinscrire/"+str+"/", //    /recruteCapvalue
+			type : "PUT",
+			success : function() {
+				console.log('bien upload');
+			},
+			error : function() {
+				console.log('failer upload');
+			}
+		});
+	}
+	
+	</script>
+<!--MAIN END-->
+<!-- <script src="../../scripts/form.js" ></script> -->

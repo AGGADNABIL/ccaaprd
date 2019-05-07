@@ -1,0 +1,150 @@
+
+<style type="text/css">
+.conteneur {
+	float: right;
+	display: block;
+}
+.picture {
+	max-width: 140px;
+	max-height: 160px;
+	border-radius: 10px;
+	/*border: 1px dotted #ccc;*/
+	overflow: hidden;
+}
+
+.pic {
+	width: 140px;
+	height: 100;
+	border-radius: 10px;
+	/*border: 1px dotted #ccc;*/
+}
+</style>
+<!--MAIN START-->
+<div id="main">
+	<!--RECENT JOB SECTION START-->
+	<section class="recent-row padd-tb">
+		<div class="container"  >
+			<div class="row">
+				<div class="col-md-9 col-sm-8">
+					
+					<div id="content-area" style="width: 100% !important;">	
+						<ul id="myList">
+						
+							<li>
+								<div >
+									<div class="text-col">
+										<div class="hold" style="width: 100% !important;">
+											<div class="resumes-content">
+												<h2> informations Personnelles </h2>
+												<div class="box">
+													<div class="hold" style="width: 100% !important;"
+														style="width: 100% !important;">
+														<!-- e:/capvalue/CapRecrute/src/main/resources/static/app/apps/upload/{{candidatat.photo}} -->
+														<div class="frame">
+														    <div class="picture">
+															<a href="#">
+															<img check-image  ng-src="/uploadFile/{{ candidat.photo }}" alt="img" class="pic"></a>
+															</div>
+														</div>
+														<div class="text-box">
+															<h4>{{ candidat.nom +' '+ candidat.prenom }}</h4>
+															<h2 style="text-transform: capitalize;">{{ candidat.profil }}</h2>
+															
+															<div class="clearfix">
+																<strong><label>Expérience : </label>{{candidat.niveauExperience}}</strong>
+															</div>
+															<div class="clearfix">
+																<strong><label>Situation Actuelle : </label>{{candidat.situationActuelle
+																	}}</strong>
+															</div>
+															<div class="clearfix">
+																<strong><label>GSM : </label>{{candidat.telephone
+																	}}</strong>
+															</div>
+
+															<div class="clearfix">
+																<strong><label>Date de naissance : </label>{{candidat.dateNaiss
+																	}}</strong>
+															</div>
+															<div class="clearfix">
+																<strong><label>Pays : </label>{{candidat.nationalite
+																	}}</strong>
+															</div>
+
+															<div class="clearfix">
+									                              <strong><label>Ville : </label>{{candidat.adresse }}</strong>
+								                            </div>
+								                            
+
+															<hr>
+															<h4>Détails :</h4>
+															<div class="clearfix">
+									                    <strong><label>Niveau d'études : </label>{{candidat.niveauEtude
+															}}</strong>
+															</div>
+															
+															<div class="clearfix">
+																<strong><label>date Disponibilité : </label>{{candidat.dateDisponibilite
+																	}}</strong>
+															</div>
+															<div class="clearfix">
+																<strong><label>Fichier joints : </label><a
+																	href="#">{{ candidat.cv }}</a></strong>
+															</div>
+															
+															<!-- <div class="clearfix">
+																<strong><label>Tarif journalier : </label> {{candidat.typeSalaire
+																	}}</strong>
+															</div> -->
+														
+															<br>
+															<hr>
+															<div class="conteneur">
+															<div class="btn-row">
+																<a href="javascript:history.go(-1)" class="resume"><i
+																	class="fa fa-file-text-o"></i>Retour</a>
+															</div>
+															
+														</div>
+														<br><br>
+															</div>
+														</div>
+													</div>
+
+
+												</div>
+											</div>
+										</div>
+									
+									</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4">
+					<h3>Derniers Offres :</h3>
+					<aside>
+						<div class="sidebar">
+							<div class="sidebar-jobs" ng-controller="OffresController">
+								<ul>
+									<li ng-repeat="o in offres | orderBy:'-datePublication' | limitTo:6">
+											<a href="" ng-click="nbVueIncrement(o.titre,o.codeOffre) | replaceSpaces ">{{o.titre}}</a>     
+									         <span><i class="fa fa-map-marker"></i>{{ o.ville.nomVille }}</span> <span><i
+											class="fa fa-calendar"></i>publié le : {{ o.datePublication | date:'dd-MM-yyyy'}}</span>
+											<span ></span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+
+
+
+

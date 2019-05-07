@@ -1,0 +1,175 @@
+
+
+
+
+
+
+
+
+
+
+
+<style>
+.ng-table-pager {
+	display: none;
+}
+</style>
+<!--MAIN START-->
+<div id="main">
+	<!--RECENT JOB SECTION START-->
+	<section class="recent-row padd-tb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div id="content-area" style="width: 100% !important;">
+
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-search"></i>
+									</div>
+
+									<input type="text" class="form-control" placeholder="Search..."
+										ng-model="searchQuery">
+
+								</div>
+							</div>
+						</form>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span class="lead">Liste des candidat</span>
+								<div class="row pull-right">
+								<span class="btn btn-warning" style="color: white !important;" >
+								    <a href="" style="color: white !important;" onClick ="$('#tableID').tableExport({type:'excel',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_candidats'});"><i class="fa fa-file-excel-o btn-success" aria-hidden="true"></i> Excel</a>
+								</span>
+								 <!-- <div class="dropdown">
+								     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								         <i class=""></i>Export table to...
+								         <span class="caret"></span>
+								     </button>
+								     <ul class="table-export dropdown-menu" table-selector="'table'"  aria-labelledby="dropdownMenu1">
+								          export-options="{type: 'pdf', escape: true, ignoreColumn : '[3,4]', tableName: 'Aanhefs' }" 
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'pdf',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_candidats'} );">PDF</a>
+								         </li>
+								         <li>
+								             <a href="" id="exportButton" ><i class="fa fa-file-pdf-o btn-danger" aria-hidden="true"></i> PDF</a>
+								         </li>
+											exportButton
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'excel',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_candidats'});"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel</a>
+								         </li>
+								
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'csv',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_candidats'});"><i class="fa fa-file-excel-o" aria-hidden="true"></i> CSV</a>
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'xml',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_candidats'});"><i class="fa-brackets" aria-hidden="true"></i> XML</a> fa fa-user fa-2x
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_candidats'});">JSON</a>
+								         </li>
+								     </ul>
+								 </div> -->
+							 </div>
+							</div>
+							<div>
+			 
+						 	</div>
+							<table infinite-scroll="getMoreData()" ng-table="tableParams" id="tableID"
+								class="table table-bordered table-striped table-condensed export-table">
+								<thead>
+						            <tr>
+						                <th>Nom</th>
+						                <th>Profile</th>
+						                <th>Email</th>
+						                <th></th>
+						                <th></th>
+						            </tr>
+						        </thead>
+								<tr id="candidat_{{candidat.codeUser}}" {{candidat.username}}	ng-repeat="candidat in candidats | orderBy:sortType:sortReverse | filter:searchQuery">
+									
+									<td data-title="'Nom'">{{candidat.nom}} {{candidat.prenom }}</td>
+									<td data-title="'Profile'" sortable="'profil'"><strong>{{candidat.profil}}</strong>
+									</td>
+									<td data-title="'E-mail'" sortable="'username'"><strong>{{candidat.username}}</strong>
+									</td>
+									
+								<td data-title="'Consulter'"><a 
+										href="/recruteCapvalue/app/index.html#/app/candidat/consulter/{{candidat.username}}/">Consulter</a>
+									</td>
+									<td data-title="'Supprimer'">
+
+										<button class="btn btn-danger btn-sm"
+											ng-click="remove(candidat.username,candidat.codeUser)">
+											<span class="fa fa-trash"></span>
+										</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+<!-- <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script> -->
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#exportButton").click(function () {
+            // parse the HTML table element having an id=exportTable
+            var dataSource = shield.DataSource.create({
+                data: "#tableID",
+                schema: {
+                    type: "table",
+                    fields: {
+                        Nom: { type: String },
+                        Profile: { type: String },
+                        Email: { type: String }
+                    }
+                }
+            });
+
+            // when parsing is done, export the data to PDF
+            dataSource.read().then(function (data) {
+                var pdf = new shield.exp.PDFDocument({
+                    author: "PrepBootstrap",
+                    created: new Date()
+                });
+
+                pdf.addPage("a4", "portrait");
+
+                pdf.table(
+                    15,
+                    15,
+                    data,
+                    [
+                        { field: "Nom", title: "Nom", width: 120 },
+                        { field: "Profile", title: "Profile", width: 200 },
+                        { field: "Email", title: "Email Address", width: 200}
+                    ],
+                    {
+                        margins: {
+                            top: 50,
+                            left: 50
+                        }
+                    }
+                );
+
+                pdf.saveAs({
+                    fileName: "liste_candidats"
+                });
+            });
+        });
+    });
+</script>
+
+
+

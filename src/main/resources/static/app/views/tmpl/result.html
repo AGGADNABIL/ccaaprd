@@ -1,0 +1,58 @@
+<!--MAIN START-->
+<div id="main">
+  <!--RECENT JOB SECTION START-->
+  <section class="recent-row padd-tb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 col-sm-8">
+          <h2>Featured Jobs</h2>
+          <div id="content-area">
+
+              <div ng-if="!offres.length">
+                  <div class="box">
+                    <div class="text-col">
+                      <h4>Aucun résultats n'a été trouvé !</h4>
+                      <a href="/app/index.html#/app/jobs-list" class="btn-1  btn-color-2 ripple">Afficher tous les offres</a>
+                    </div>
+                  </div>
+              </div>
+              <div ng-if="offres.length">
+                <ul>
+                <li id="myList" ng-repeat="o in offres">
+                  <div class="box">
+                    <div class="text-col">
+                      <h4><a href="/app/index.html#/app/job/{{offre.codeOffre}}">{{o.titre}}</a></h4>
+    <p><span ng-bind-html="offre.description | unsafe | limitHtml:200"></span><a href="/app/index.html#/app/job/{{offre.codeOffre}}">[...]</a></p>
+                    <a href="#" class="text"><i class="fa fa-map-marker"></i>{{offre.ville.nomVille }}</a> <a href="#" class="text"><i class="fa fa-calendar"></i>{{offre.datePublication | date:'dd MMMM yyyy'}} </a> </div>
+            <a href="/app/index.html#/app/job/{{offre.codeOffre}}"  class="btn-1  btn-color-4 ripple">{{offre.typeContrat.titre}}</a> </div>
+                </li>
+                </ul>
+                <div id="loadMore"> <a href="#" class="load-more"><i class="fa fa-user"></i>Load More Jobs</a></div>
+              </div>
+
+
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-4">
+          <h2>Featured Jobs</h2>
+          <aside>
+            <div class="sidebar">
+              <div class="box">
+                <div class="thumb"> <a href="#"><img src="images/features-img-1.jpg" alt="img"></a>
+                  <div class="caption"><img src="images/envato-text.png" alt="envato"></div>
+                </div>
+                <div class="text-box"> <a href="#" class="btn-time">Part Time</a>
+                  <h4><a href="#">UI/UX Visual Designers</a></h4>
+                  <a href="#" class="text"><i class="fa fa-map-marker"></i>Moorgate, London</a> <a href="#" class="text"><i class="fa fa-calendar"></i>Dec 22, 2015 - Mar 17, 2016 </a> <strong class="price"><i class="fa fa-money"></i>$4000 - $5000</strong> <a href="#" class="btn-apply">Apply for this Job</a> </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+<!--FOR CHECKBOX-->
+

@@ -1,0 +1,633 @@
+<style type="text/css">
+textarea {
+	border: 1px solide #ccc !important;
+	height: 120px !important;
+}
+
+h2 {
+	display: inline;
+}
+textarea {
+min-height: 200px;
+overflow-y: auto;
+word-wrap:break-word
+}
+</style>
+
+<section class="resum-form padd-tb">
+	<div class="container" ng-controller="PrincipalCtrl"><!-- ng-controller="PrincipalCtrl" -->
+
+		<div class="row" ><!-- ng-controller="NosInfosCtrl" -->
+			<!-- ng-controller="NosInformationCtrl" -->
+			<div class="col-md-12 col-sm-12">
+				<div class="resumes-content">
+		
+					
+					<div class="panel-heading">
+						<form class="form-horizontal" role="form">
+							<h2>Nos informations :(slide 1)</h2>
+							<span class="lead pull-right"><button slide-toggle="#derper"
+									class="btn btn-primary btn-sm">
+									<span class="fa fa fa-pencil fa-lg"></span><strong>
+										Editer liste</strong>
+								</button></span>
+						</form>
+					</div>
+					<div class="box">
+					
+					<div id="derper" class="slideable" style="max-height:auto !important; height: auto !important">
+							<table infinite-scroll="getMoreData()" ng-table="tableParams"
+								class="table table-bordered table-striped">
+
+								<tr id="enty_{{nosInfos.id }}"
+									ng-repeat="nosInfos in datainf">   <!-- | orderBy:sortType:sortReverse | filter:searchQuery |orderBy:'-priorite' -->
+									<td data-title="'Titre'" sortable="'titre'"
+										style="max-width: 300px;">
+										<label ng-hide="editingInfos[nosInfos.id]">	
+											{{nosInfos.titre}}
+										</label>
+										
+									    <input ng-show="editingInfos[nosInfos.id]" type="text" ng-model="nosInfos.titre"/>
+											
+									</td>
+
+									<td data-title="'Photo '" sortable="'image'">
+										<img src="/uploadMetier/{{nosInfos.image}}" style="width: 40px;height: 40px;max-width: 40px;max-height: 40px;" />
+										<hr/> <!-- /uploadMetier -->
+										
+									 
+										<!-- <div class="upload-box">
+												<div class="hold">
+													<span class="btn-file">
+														file <input id="upload-file-in-info-{{ nosInfos.id }}" 
+														 type="file" onchange="angular.element(this).scope().setFile(this)"
+														name="uploadfile" accept="*" />onchange="angular.element(this).scope().setFile(this)"
+													</span>
+												</div>
+											</div> 
+											 -->
+										
+									<form id="upload-frm-infos-{{ nosInfos.id }}" role="form">
+												
+												<div class="upload-box" >
+													<div class="hold" style="width: auto !important">
+														 <span class="btn-file">
+															Parcourir <input show-notif id="upload-file-in-info-{{ nosInfos.id }}" type="file" 
+															   
+															   onchange="angular.element(this).scope().setFile(this)"
+															name="uploadfile" accept="*" />
+														</span>
+													</div>
+												</div>
+										 	
+								  </form>
+								</td>
+									
+									<td data-title="'Résumé'" sortable="'contenuShow'">
+									  <!-- <p ng-hide="isVisible"  style="width: 240px;max-width: 240px;">
+									  		<span ng-bind-html=" nosInfos.contenuShow | unsafe"></span>
+											{{nosInfos.contenuShow}}
+										
+									  </p> -->
+									  <textarea  cols="30" 
+									  	ui-tinymce="tinymceOptions"  ng-model="nosInfos.contenuShow"></textarea>
+									</td>
+									
+									<td data-title="'Contenu'" sortable="'contenu'">
+									  <!-- <p ng-hide="isVisible" style="width: 100%;">
+									  		<span ng-bind-html=" nosInfos.contenu | unsafe"></span>
+											{{nosInfos.contenu}}
+									  </p> -->
+									  <textarea cols="60" ui-tinymce="tinymceOptions" ng-model="nosInfos.contenu"></textarea>
+									</td>
+									<td data-title="'Priorité '" sortable="'priorite'">
+									<select ng-model="nosInfos.priorite" style="min-width: 80px;">
+					<!-- | limitTo:3 -->	<option ng-repeat="propre in priorits " 
+											   ng-selected="{{nosInfos.priorite == $index }}" value="{{ $index }}" > {{ propre }}</option> <!-- {{ $index==NosInfos.priorite }} -{{nosInfos.priorite}} - {{$index}} - -->
+									</select> 
+									{{ priorits[nosInfos.priorite] }}
+									</td>
+									<td data-title="'Action'" style="width: 100px;min-width: 60px;">
+										<button class="btn btn-default btn-sm" ng-show="editingInfos[nosInfos.id]" ng-click="updated(nosInfos)">
+										 	<span class="fa fa-check"></span>
+										</button>
+			
+										<button class="btn btn-default btn-sm" ng-hide="editingInfos[nosInfos.id]" 
+											ng-click="modifyInfos(nosInfos)">
+											<span class="fa fa-pencil"></span>
+										</button>
+										
+										<!-- <button class="btn btn-default btn-sm" ng-show="isVisible" ng-click="updated(nosInfos)">
+										 	<span class="fa fa-check"></span>
+										</button>
+										
+										<button  class="btn btn-default btn-sm" ng-hide="isVisible"
+											ng-click="showHide()"> ng-click="showHide()"
+											<span class="fa fa-pencil"></span>
+										</button> -->
+										
+										<button class="btn btn-danger btn-sm"
+											ng-click="removed(nosInfos.id)">
+											<span class="fa fa-trash"></span>
+										</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<form id="upload-file-frm-info" role="form"
+							class="form-horizontal" ng-submit="valider()">
+
+							<div>
+								<label style="color: #1b8af3;">Ajouter une information:</label>
+								<div class="form-group">
+									<div class="upload-box">
+										<label class="col-sm-3">Sélectionner image :</label>
+										<div class="col-sm-9">
+											<div class="hold">
+												<a href="#">Taille max 2 MB</a> <span class="btn-file">
+													Parcourir <input id="upload-file-info" type="file"
+													name="uploadfile" accept="*" />
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="titr" class="col-sm-3 control-label">Titre
+										:</label>
+									<div class="col-sm-9">
+										<input class="form-control" id="titr" required type="text"
+											ng-model="nosInfos.titre">
+									</div>
+								</div>
+								<br/> <br/>
+								<div class="form-group">
+
+									<label for="contentShow" class="col-sm-3 control-label">Contenu à afficher
+										:</label>
+									<div class="col-sm-9">
+										<textarea class=" form-control" id="contentShow" required
+											ng-model="nosInfos.contenuShow" ui-tinymce="tinymceOptions"></textarea><!-- ui-tinymce="tinymceOptions"  -->
+									</div>					
+								</div>
+								<div class="form-group">
+
+									<label for="content" class="col-sm-3 control-label">Contenu
+										:</label>
+									<div class="col-sm-9">
+										<textarea class=" form-control" id="content" required
+											ng-model="nosInfos.contenu" ui-tinymce="tinymceOptions"></textarea><!-- ui-tinymce="tinymceOptions"  -->
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-3 control-label">Priorité :</label>
+									<div class="col-sm-9">
+										<select ng-model="nosInfos.priorite" style="min-width: 80px;">
+											<option ng-repeat="pr in priorits" value="{{ $index }}">{{pr}}</option>
+										</select>
+										
+									</div>
+								</div>
+							</div>
+							
+							
+							<div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="btn-col">
+											<input style="display: block; width: 100% !important;"
+												type="submit" value="Enregistrer">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+			<!-- ng-controller="NosServiceCtrl" -->
+			<div class="col-md-12 col-sm-12"> <!--  ng-controller="NosMetierCtrl" -->
+
+				<div class="resumes-content">
+					<div class="panel-heading">
+						<form class="form-horizontal" role="form">
+							<h2>Nos services :(slide 2)</h2>
+							<span class="lead pull-right"><button slide-toggle="#derp"
+									class="btn btn-primary btn-sm">
+									<span class="fa fa fa-pencil fa-lg"></span><strong>
+										Editer liste</strong>
+								</button></span>
+						</form>
+					</div>
+
+
+					<div class="box">
+						<div id="derp" class="slideable">
+							<table infinite-scroll="getMoreDat()" ng-table="tableParam"
+								class="table table-bordered table-striped">
+
+								<tr id="entry_{{nosMetier.id }}"
+									ng-repeat="nosMetier in dat">     <!-- | orderBy:sortType:sortReverse | filter:searchQuery |orderBy:'-priorite'  -->
+									<td data-title="'Titre'" sortable="'titre'"
+										style="max-width: 300px;">
+										<label  ng-hide="editingData[nosMetier.id]"> <!-- ng-hide="isNotHidden" -->
+											{{nosMetier.titre}}
+										</label>
+										<input  type="text" ng-model="nosMetier.titre" ng-show="editingData[nosMetier.id]" />
+									</td>
+									
+
+									<td data-title="'Photo '" sortable="'image'">
+										<img src="/uploadMetier/{{nosMetier.image}}" style="width: 40px;height: 40px;max-width: 40px;max-height: 40px;" />
+										  <hr/>
+										  	 <!-- /uploadMetier  -->
+										<!-- <hr/>
+									<form id="upload-file-frmMetier" role="form">
+										<div class="upload-box">
+											<div class="hold">
+													<span class="btn-file">
+														file <input id="upload-file-input-Metier" type="file"
+														name="uploadfile" accept="*" />
+													</span>
+												</div>
+					
+										</div>
+									</form> -->
+									
+									<form id="upload-frm-metier-{{ nosMetier.id }}" role="form">
+												
+												<div class="upload-box" >
+													<div class="hold" style="width: auto !important">
+														 <span class="btn-file">
+															Parcourir <input show-notifmetier id="upload-file-in-metier-{{ nosMetier.id }}" type="file" 
+															   
+															   onchange="angular.element(this).scope().setFile(this)"
+															name="uploadfile" accept="*" />
+														</span>
+													</div>
+												</div>
+										 	
+								  </form>
+									</td>
+									
+									<td data-title="'Résumé'" sortable="'contenuShow'">
+									  <!-- <p ng-hide="isNotHidden" style="width: 240px;max-width: 240px;">
+											<span ng-bind-html=" nosMetier.contenuSow | unsafe"></span>
+									  </p> -->
+									  <textarea  ui-tinymce="tinymceOptions" cols="30" ng-show="isNotHidden" ng-model="nosMetier.contenuShow"></textarea>
+									</td>
+									
+									<td data-title="'Contenu'" sortable="'contenu'">
+										<!-- <p ng-hide="isNotHidden">
+										   <span ng-bind-html=" nosMetier.contenu | unsafe"></span>
+										</p> -->
+										 <textarea cols="60" ng-model="nosMetier.contenu" ui-tinymce="tinymceOptions"></textarea>
+									</td>
+									<td data-title="'Priorité'" sortable="'priorite'">
+									
+									<select ng-model="nosMetier.priorite" style="min-width: 80px;"> 
+					<!--  | limitTo:3  ng-selected="{{ nosMetier.priorite == $index }}"--><option ng-repeat="propr in priorities" 
+											   value="{{ $index }}">{{ propr }}</option>   <!-- {{ nosMetier.priorite == $index }} -{{nosMetier.priorite}} - {{$index}} -  -->
+									</select>
+									  {{ priorities[nosMetier.priorite] }}
+									</td>
+									<td data-title="'Action'" style="width: 100px;min-width: 60px;">
+										<button class="btn btn-default btn-sm" ng-show="editingData[nosMetier.id]" ng-click="modifier(nosMetier)">
+										 	<span class="fa fa-check"></span>
+										</button>
+			
+										<button class="btn btn-default btn-sm" ng-hide="editingData[nosMetier.id]" 
+											ng-click="modify(nosMetier)">
+											<span class="fa fa-pencil"></span>
+										</button>
+										
+										<!-- <button class="btn btn-default btn-sm" ng-show="isNotHidden" ng-click="modifier(nosMetier)">
+										 	<span class="fa fa-check"></span>
+										</button>
+			
+										<button class="btn btn-default btn-sm" ng-hide="isNotHidden" 
+											ng-click="showHidden(nosMetier.id)">
+											<span class="fa fa-pencil"></span>
+										</button> -->
+										
+										
+										<button class="btn btn-danger btn-sm" 
+											ng-click="remove(nosMetier.id)">
+											<span class="fa fa-trash"></span>
+										</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<form id="upload-file-frmSer" role="form" class="form-horizontal"
+							ng-submit="enregistrer()">
+
+							<div>
+								<label style="color: #1b8af3;">Ajouter un service :</label>
+								<div class="form-group">
+									<div class="upload-box">
+										<label class="col-sm-3">Sélectionner image :</label>
+										<div class="col-sm-9">
+											<div class="hold">
+												<a href="#">Taille max 2 MB</a> <span class="btn-file">
+													Parcourir <input id="upload-file-input-serv" type="file"
+													name="uploadfile" accept="*" />
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="titre" class="col-sm-3 control-label">Titre
+										:</label>
+									<div class="col-sm-9">
+										<input class="form-control" id="titre" required type="text"
+											ng-model="NosMetier.titre">
+									</div>
+								</div>
+								<div class="form-group">
+
+									<label for="contenuShow" class="col-sm-3 control-label">Contenu à afficher
+										:</label>
+
+									<div class="col-sm-9">
+										<textarea class="form-control" id="contenuShow" required
+											ng-model="NosMetier.contenuShow" ui-tinymce="tinymceOptions"></textarea> <!-- ui-tinymce="tinymceOptions"  -->
+									</div>
+								</div>
+								<div class="form-group">
+
+									<label for="contenu" class="col-sm-3 control-label">Contenu
+										:</label>
+
+									<div class="col-sm-9">
+										<textarea class=" form-control" id="contenu" required
+											ng-model="NosMetier.contenu" ui-tinymce="tinymceOptions"></textarea> <!-- ui-tinymce="tinymceOptions"  -->
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">Priorité :</label>
+									<div class="col-sm-9">
+										<select ng-model="NosMetier.priorite" style="min-width: 80px;">
+											<option ng-repeat="prop in priorities" value="{{ $index }}">{{
+												prop }}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="btn-col">
+											<input style="display: block; width: 100% !important;"
+												type="submit" value="Enregistrer">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="referenceCtrl" ng-controller="referenceCtrl">
+			<div class="col-md-12 col-sm-12">
+				<div class="resumes-content">
+					<h2>Nos references :(slide 3)</h2>
+
+					<div class="box">
+
+						<form id="upload-file-frmRef" role="form">
+
+							<div>
+								<label style="color: #1b8af3;">Ajouter une référence :</label>
+								<!-- <div class="form-group">
+									<div class="upload-box">
+										<label class="col-sm-3">Sélectionner image :</label>
+										<div class="col-sm-9">
+											<div class="hold">
+												<a href="#">Taille max 2 MB</a> <span class="btn-file">
+													Parcourir <input id="upload-file-inp" type="file"
+													name="uploadfile" accept="*" />
+												</span>
+											</div>
+										</div>
+									</div>
+								</div> -->
+								<div class="upload-box">
+									<div class="hold">
+										<a href="#">Taille max 2 MB</a> <span class="btn-file">
+											Parcourir <input id="upload-file-in" type="file"
+											name="uploadfile" accept="*" />
+										</span>
+									</div>
+								</div>
+
+								
+							</div>
+							<div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="btn-col">
+											<input style="display: block; width: 100% !important;"  id=""
+												type="submit" value="Enregistrer">
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</form>
+						<br/>
+						<div class="row">
+						<form role="form">
+									<div class="col-md-12">
+									    <div class="row" style="padding-right: 15px;">
+									        <!-- <span class="lead"><button class="btn btn-danger btn-sm" id="deleteAll" title="del">
+									        	<span class="fa fa-trash fa-lg">
+									        	</span><strong> Supprimer la seléction</strong></button></span> -->
+									    	<span class="lead pull-right"><button slide-toggle="#togglerRef"
+												class="btn btn-primary btn-sm">
+												<span class="fa fa fa-pencil fa-lg"></span><strong>
+													Editer liste</strong>
+															</button>
+											</span>
+									    </div>
+									    <div class="row" ng-controller="referenceCtrl">
+											<div id="togglerRef" class="slideable" style="width: 60%;margin-left: auto;margin-right: auto;">
+							<table infinite-scroll="getMor()" ng-table="tableParam"
+													class="table table-bordered table-striped">
+										
+						                  <tbody>
+										
+										<tr id="ent_{{reference.codeReference}}"
+											ng-repeat="reference in refer">     <!-- | orderBy:sortType:sortReverse | filter:searchQuery |orderBy:'-priorite'  -->
+											<!-- <td>
+                                            	 <input type="checkbox" id="ent_{{reference.codeReference}}" value="{{reference.codeReference}}"  />
+                						    </td> -->
+											<td data-title="'Date d\'enregistrement'" sortable="'datePub'">
+												<label>
+													{{reference.datePub | date:'dd-MM-yyyy hh:mm'}}
+												</label>	
+											</td>
+											<td data-title="'Réference'" sortable="'reference'">
+												<img src="/uploadReference/{{reference.reference}}" style="width: 40px;height: 40px;max-width: 40px;max-height: 40px;" />
+											</td>
+											<td data-title="'Action'" style="width: 100px;min-width: 60px;">
+												<button class="btn btn-danger btn-sm" type="submit"
+													ng-click="supprimer(reference.codeReference)">
+													<span class="fa fa-trash"></span>
+												</button>
+											</td>
+										</tr>
+								</tbody>
+							</table>
+											</div>
+										</div>
+									</div>
+									</form>
+								</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+</section>
+
+<script>
+	$(document).ready(function() {
+		
+		//$("#upload-file-input-Metier").on("change", uploadModifMetier);
+		//var scope=angular.element('#referenceCtrl').scope();
+		
+		//angular.element($('#upload-file-in-info2')).triggerHandler('input');
+			/* $('#upload-file-in-info2').on('change',function(){
+				console.log('logger');
+			}); */
+		   
+		    //$("#upload-file-in-info").change(uploadding);
+		   //upload-frm-info   upload-file-in-info
+		   
+		//upload-file-input-Metier upload-file-frmMetier
+		//$("#upload-file-frmRef").submit(uploader);
+		
+		 $("#upload-file-frmRef").on('submit',uploader);
+		$("#upload-file-input-serv").on("change", uploadServ);
+		$("#upload-file-info").on("change", uploadInfos); 
+		//$("#upload-file-inp").submit( uploader);
+	});
+	
+	function uploadding() {
+		
+	 $.ajax({
+			url : "/recruteCapvalue/uploadMetier", //    /recruteCapvalue
+			type : "POST",
+			data : new FormData(),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				console.log("succes");
+			},
+			error : function() {
+				console.log("echec");
+			}
+		}); 
+	};
+	
+	function uploadModifMetier() {
+		$.ajax({
+			url : "/recruteCapvalue/uploadMetier", //    /recruteCapvalue
+			type : "POST",
+			data : new FormData($("#upload-file-frmMetier")[0]),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				console.log("succes");
+			},
+			error : function() {
+				console.log("echec");
+			}
+		});
+	};
+	
+	
+	function uploader() {
+		$.ajax({
+			url : "/recruteCapvalue/uploadReference", 
+			type : "POST",
+			data : new FormData($("#upload-file-frmRef")[0]),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				// Handle upload success
+				console.log('success');
+				angular.element('#referenceCtrl').scope().validate();
+				//$("#upload-file-message").text();
+				//"File succesfully uploaded");
+			},
+			error : function() {
+				// Handle upload error
+				console.log('rejet');
+				angular.element('#referenceCtrl').scope().invalidate();
+				//angular.element('#home').scope().invalider();
+				//$("#upload-file-message").text();
+				//	"File not uploaded (perhaps it's too much big)");
+			}
+		});
+	};
+	
+	function uploadInfos() {
+		$.ajax({
+			url : "/recruteCapvalue/uploadMetier", //    /recruteCapvalue
+			type : "POST",
+			data : new FormData($("#upload-file-frm-info")[0]),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				console.log("succes");
+			},
+			error : function() {
+				console.log("echec");
+			}
+		});
+	};
+	function uploadServ() {
+
+		$.ajax({
+			url : "/recruteCapvalue/uploadMetier", //   /recruteCapvalue
+			type : "POST",
+			data : new FormData($("#upload-file-frmSer")[0]),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				console.log("succes");
+			},
+			error : function() {
+				console.log("echec");
+			}
+		});
+	};
+</script>

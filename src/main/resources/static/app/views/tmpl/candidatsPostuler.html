@@ -1,0 +1,163 @@
+
+<style>
+.ng-table-pager {
+	display: none;
+}
+</style>
+<!--MAIN START-->
+<div id="main">
+	<!--RECENT JOB SECTION START-->
+	<section class="recent-row padd-tb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div id="content-area" style="width: 100% !important;">
+
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-search"></i>
+									</div>
+
+									<input type="text" class="form-control" placeholder="Search..."
+										ng-model="searchQuery">
+
+								</div>
+							</div>
+						</form>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span class="lead">Liste des Candidats Postulé</span>
+								<div class="row pull-right">
+								<span class="btn btn-warning" style="color: white !important;" >
+								    <a href="" style="color: white !important;" onClick ="$('#tableID').tableExport({type:'excel',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_candidats'});"><i class="fa fa-file-excel-o btn-success" aria-hidden="true"></i> Excel</a>
+								</span>
+								 <!-- <div class="dropdown">
+								     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								         <i class=""></i>Export table to...
+								         <span class="caret"></span>
+								     </button>
+								     <ul class="table-export dropdown-menu" table-selector="'table'"  aria-labelledby="dropdownMenu1">
+								          export-options="{type: 'pdf', escape: true, ignoreColumn : '[3,4]', tableName: 'Aanhefs' }" 
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'pdf',escape:'false',ignoreColumn:'[5]',tableName: 'Liste_candidats_postules'} );">PDF</a>
+								         </li>
+								         <li>
+								             <a href="" id="exportButton">PDF</a>
+								         </li>
+								
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'excel',escape:'false',ignoreColumn:'[5]',tableName: 'Liste_candidats_postules'});">Excel</a>
+								         </li>
+								
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'csv',escape:'false',ignoreColumn:'[5]',tableName: 'Liste_candidats_postules'});">CSV</a>
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'xml',escape:'false',ignoreColumn:'[5]',tableName: 'Liste_candidats_postules'});">XML</a>
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'json',escape:'false',ignoreColumn:'[5]',tableName: 'Liste_candidats_postules'});">JSON</a>
+								         </li>
+								     </ul>
+								 </div> -->
+							 </div>
+							</div>
+							<table infinite-scroll="getMoreData()" ng-table="tableParams" id="tableID"
+								class="table table-bordered table-striped table-condensed">
+								<thead>
+						            <tr>
+						                <th>Nom</th>
+						                <th>Profile</th>
+						                <th>FichierCV</th>
+						                 <th>LettreMotivation</th>
+						                <th>PretentionSalarial</th>
+						                <th>Action</th>
+						            </tr>
+						        </thead>
+						        <tbody>
+									<tr id="postuler.candidat_{{postuler.candidat.codeUser}}" {{postuler.candidat.username}}	ng-repeat="postuler in  postulers"> <!--| orderBy:sortType:sortReverse | filter:searchQuery  -->
+										 
+										<td data-title="'Nom'">{{ postuler[1].candidat.nom}} {{ postuler[1].candidat.prenom }}</td>
+										<td data-title="'Profile'" sortable="'titre'"><strong>{{postuler[1].candidat.profil}}</strong>
+										</td>
+										<td data-title="'fichierCV'"><a href="" ng-click="downloadPost(postuler[1].fichierCV)">{{postuler[1].fichierCV}}</a></td>
+										<td data-title="'fichierLettreMotivation'"><a href="" ng-click="downloadPost(postuler[1].fichierLettreMotivation)">{{postuler[1].fichierLettreMotivation}}</a></td>
+										<td data-title="'pretentionSalarial'">{{postuler[1].pretentionSalarial}}</td>
+										
+										<td data-title="'Consulter'"><a href="/recruteCapvalue/app/index.html#/app/candidat/consulter/{{postuler[1].candidat.username}}/">Consulter</a>
+										</td>
+								
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#exportButton").click(function () {
+            // parse the HTML table element having an id=exportTable
+           
+            var dataSource = shield.DataSource.create({
+                data: "#tableID",
+                schema: {
+                    type: "table",
+                    fields: {
+                        Nom: { type: String },
+                        Profile: { type: String },
+                        FichierCV: { type: String },
+                        LettreMotivation: { type: String },
+                        PretentionSalarial: { type: Number }
+                        
+                    }
+                }
+            });
+
+            // when parsing is done, export the data to PDF
+            dataSource.read().then(function (data) {
+                var pdf = new shield.exp.PDFDocument({
+                    author: "PrepBootstrap",
+                    created: new Date()
+                });
+
+                pdf.addPage("a4", "portrait");
+
+                pdf.table(
+                    15,
+                    15,
+                    data,
+                    [
+                        { field: "Nom", title: "Nom", width: 80 },
+                        { field: "Profile", title: "Profile", width: 120 },
+                        { field: "FichierCV", title: "CV", width: 120} ,
+                        { field: "LettreMotivation", title: "Lettre Motivation", width: 120 },
+                        { field: "PretentionSalarial", title: "Pretention Salarial", width: 120 }
+                    ],
+                    {
+                        margins: {
+                            top: 50,
+                            left: 50
+                        }
+                    }
+                );
+
+                pdf.saveAs({
+                    fileName: "liste_cdts_postulants"
+                });
+            });
+        });
+    });
+</script>
+
+
+
+

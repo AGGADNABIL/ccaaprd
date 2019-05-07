@@ -1,0 +1,180 @@
+<style type="text/css">
+h2 {
+	padding-top: 0px;
+}
+
+.pic {
+	width: 70px;
+	height: 70px;
+	border-radius: 10px;
+	/* border: 1px dotted #ccc; */
+}
+
+.thumbe {
+	max-width: 300px;
+}
+
+#imag {
+	width: 250px;
+}
+.rigth {
+  float: right;
+     top: 0px;
+     position: relative;
+     display: inline;
+}
+</style>
+
+
+
+
+<!--MAIN START-->
+<div id="main">
+	<!--SEARCH BAR SECTION START-->
+	<section class="candidates-search-bar">
+		<div class="container">
+			<form ng-submit="search(contrat,ville,competence)">
+				<div class="row">
+					<div class="col-md-4">
+						<input name="competence" ng-model="competence" type="text"
+							placeholder="Compétence">
+					</div>
+					<div class="col-md-4">
+						<input name="ville" type="text" ng-model="ville"
+							placeholder="Ville">
+					</div>
+					<div class="col-md-3">
+						<input name="contrat" type="text" ng-model="contrat"
+							placeholder="Type de contrat">
+					</div>
+					<div class="col-md-1">
+						<button type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<!--SEARCH BAR SECTION END-->
+	<!--RECENT JOB SECTION START-->
+	<section class="recent-row padd-tb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-8">
+					<div id="content-area" ng-show="offres.length">
+						<h4>Derniéres offres :</h4>
+						<ul id="myList">
+							<li
+								ng-repeat="offre in offres | orderBy:'-dateCreation' | filter:{etat:'true'} | limitTo:limit">
+								<div class="box">
+									<div class="text-col">
+										<div class="hold">
+											<h4>
+												<a href=""
+													ng-click="nbVueIncrement(offre.titre,offre.codeOffre)">{{offre.titre}}</a>
+											</h4>
+											<p ng-bind-html="offre.poste | unsafe | limitHtml:260">
+												<a ng-click="nbVueIncrement(offre.titre,offre.codeOffre)"
+													href="">[... Plus]</a>
+											</p>
+											<a href="" ng-click="search(null,offre.ville.nomVille,null)"
+												class="text"><i class="fa fa-map-marker"></i>{{offre.ville.nomVille}}</a>
+											<a style="pointer-events: none;" href="" class="text"><i
+												class="fa fa-calendar"></i>{{offre.datePublication |
+												date:'dd-MM-yyyy'}} </a> <a
+												ng-show="offre.dureeMission !=Null && offre.typeContrat.titre !='CDI'"
+												style="pointer-events: none;" href="" class="text"><i
+												class="fa fa-clock-o"></i>{{offre.dureeMission}} </a>
+										</div>
+									</div>
+									<div id="tags" class="tags"> 
+									  
+    									<ul class="list-inline">
+										  <li  ng-repeat="tag in comptenceTags" ng-show="tag.offre.codeOffre == offre.codeOffre"> 
+
+											<a href="" ng-click="search(null,null,tag.competence.titre)"><i class="fa fa-tags"></i>{{tag.competence.titre}}</a>
+										 </li>
+										 
+										</ul>
+										<a href="" ng-click="search(offre.typeContrat.titre,null,null)"  class="btn-1 btn-color-{{offre.typeContrat.codeTypeContrat}} ripple rigth">
+													{{offre.typeContrat.titre}}
+										</a>
+										
+									</div>
+								</div>
+							</li>
+
+						</ul>
+						<div id="loadMore" ng-show="showLoadMoreButton">
+							<a href="" class="load-more" ng-click="loadMore()"><i
+								class="fa fa-user"></i>Load More Jobs</a>
+						</div>
+					</div>
+          <div ng-hide="offres.length" style="width: 100%; float: left;">
+            <h3>Désolé, aucun résultat trouvé pour votre recherche.</h3>
+          </div>
+				</div>
+				<div class="col-md-3 col-sm-4">
+					<h4>Offre conseil IT :</h4>
+
+					<aside>
+
+						<div class="sidebar">
+							<div class="box">
+								<div class="thumbe">
+									<a href="#"><img id="imag" src="images/cappp.PNG" alt="img"></a>
+								</div>
+								<div class="text-box">
+									<a href="#" class="btn-time">Freelance</a>
+									<h4>Professionnalisme, Compétence et Expérience...</h4>
+									<span>Telle est la ligne de conduite que nos consultants
+										respectent toujours lors de l'étude et de l'implémentation
+										d'un projet. Nos intervenants possèdent des profils variés.
+										Nous nous adaptons aisément à votre mode travail pour vous
+										fournir la compétence la plus approriée aux différentes étapes
+										du projet.</span>
+
+								</div>
+							</div>
+
+							 <!--  <h2>Derniers missions :</h2>
+				                <div class="sidebar-jobs" ng-controller="OffresController">
+				                  <ul>
+				                     <li ng-repeat="o in offres | orderBy:'-datePublication' | limitTo:5"> 
+				                    		<span><a href="" ng-click="nbVueIncrement(o.titre,o.codeOffre) | replaceSpaces ">{{o.titre}}</a><p style="float: right;position: relative;"> Experience de {{o.niveauExperience}} et plus.</p></span>
+				                     </li>
+				                  </ul>
+				                </div> -->
+				                
+				                <h4>Notre objectif:</h4>
+							<div class="sidebar-jobs">
+								<ul>
+									<li><span>Optimiser la gestion de l'information au
+											sein de votre entreprise.</span></li>
+									<li><span>Vous guider dans vos choix lors de la
+											mise en oeuvre de solutions destinées à valoriser vos données
+									</span></li>
+									<li><span>Vous accompagner dans l'utilisation de
+											nos produits afin d'exploiter pleinement les technologies
+											mises à votre disposition. </span></li>
+									<li><span>Vous assister dans la résolution
+											d'éventuels problèmes techniques ou fonctionnels. </span></li>
+									<li><span>Vous suivre dans l'évolution de vos
+											besoins et dans la conduite du changement. </br>
+										</br>
+										</br>
+									</span></li>
+								</ul>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+
+</script>

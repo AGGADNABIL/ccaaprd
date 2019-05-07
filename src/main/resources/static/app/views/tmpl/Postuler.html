@@ -1,0 +1,55 @@
+
+<section class="resum-form padd-tb">
+<div class="container">
+<form ng-submit="valider()" enctype="multipart/form-data">
+
+<div class="col-md-6 col-sm-6">
+<label>Ajouter Votre CV</label>
+<div class="upload-box">
+<div class="hold"><a href="#">Maximum file size 10 MB</a> <span class="btn-file"> Parcourir Fichier
+	<input name="cvFile"
+									ng-model="cvFile" ui-jq="filestyle"
+									type="file"
+									onchange="angular.element(this).scope().setFile(this,'cv')" >
+</span> </div>
+</div>
+</div>
+				
+<div class="col-md-6 col-sm-6">
+<label>Ajouter Votre Lettre de Motivation</label>
+<div class="upload-box">
+<div class="hold"><a href="#">Maximum file size 10 MB</a> <span class="btn-file"> Parcourir Fichier
+	<input name="fichierLettreMotivation"
+									ng-model="fichierLettreMotivation" ui-jq="filestyle"
+									type="file"
+									onchange="angular.element(this).scope().setFile(this,'lettre')">
+</span> </div>
+</div>
+</div>
+<div class="col-md-6 col-sm-6">
+<label>Pretentions Salariales</label>
+	<input type="number" id="pretentionSalarial"
+								name="pretentionSalarial" class="form-control"
+								ng-model="postuler.pretentionSalarial" required></div>
+
+	<div class="row">
+						<div class="col-md-12">
+							<div class="btn-col">
+								<input class="pull-right" type="submit" value="Envoyer">
+							</div>
+						</div>
+				</div>
+
+				<!-- <div class="row">
+          <div class="col-md-12">
+            <div class="btn-col">
+              <input type="submit" class="pull-right" value="Preview Your Resume">
+              <input type="submit" ui-sref="app.admin.jobs.list*" value="Retour">
+            </div>
+          </div>
+        </div> -->
+
+</form>
+</div>
+</section>
+ 

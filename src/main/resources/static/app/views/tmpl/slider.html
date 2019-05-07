@@ -1,0 +1,147 @@
+<style type="text/css">
+body{
+	background-image:url('../asset/background.png');
+	background-repeat: repeat;	
+	margin: 0%;	
+	font-family: 'Advent Pro', sans-serif;
+}
+
+.slideshow {
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  position:relative;
+  width:600px;
+  overflow:hidden;
+  background: #1a1a1a;
+  margin: 0 auto;
+  color: white;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: .3em;
+  margin-top: 30px;
+}
+
+#header {
+	background-color: #FFFFFF;
+	width:100%;
+	height:100px;
+	border-bottom: 4px solid #EE514B;
+}
+
+#withinheader {
+	width:60%;
+	margin: 0 auto;
+	height: 100px;
+}
+
+.imageslide{
+	width:600px;
+	height:400px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	overflow:hidden;
+	position:relative;
+	text-align: center;
+}
+
+.imageslide .slider-content {
+  position: absolute;
+  width:100%;
+  height:400px;
+  
+}
+
+.animate-enter,.animate-leave {
+	-webkit-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-moz-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-ms-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-o-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+}
+
+.animate-enter {
+	left:100%;
+}
+
+.animate-enter.animate-enter-active {
+	left:0;
+}
+
+.animate-leave {
+	left:0;
+}
+
+.animate-leave.animate-leave-active {
+	margin-left:-100%;
+}
+
+#mainbody {
+	background-color: #FFFFFF;
+	width:50%;
+	min-height:1024px;
+	height: auto;
+	border-radius: 5px;
+	border: 1px solid #EEEEEE;
+	margin: 0 auto;
+}
+</style>
+<!--MAIN START-->
+<div id="main">
+	<!--RECENT JOB SECTION START-->
+
+
+
+	<section class="resumes-section padd-tb">
+			<div id="header">
+			<div id="withinheader">
+			this is header
+			</div>
+		</div>
+		<div class="imageslide" ng-switch='slideshow' ng-animate="'animate'">
+			<div class="slider-content" ng-switch-when="1">
+				<p>Slider's are amazing1!</p>
+			</div>	
+			<div class="slider-content" ng-switch-when="2">
+				<p>Slider's are amazing2!</p>
+			</div>
+			<div class="slider-content" ng-switch-when="3">
+				<p>Slider's are amazing3!</p>
+			</div>	
+			<div class="slider-content" ng-switch-when="4">
+				<p>Slider's are amazing4!</p>
+			</div>	
+		</div>
+		<div id="mainbody">
+		this is body
+		</div>
+	</body>
+	</section>
+
+
+	<section>
+		<form ng-submit="submitscholarshipForm()">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-4">
+						<input type="text"
+							placeholder="Enter Job Title, Skills or Company">
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<input type="text"
+							placeholder="Enter City, State, Province or Country">
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<input type="text" placeholder="Category">
+					</div>
+					<div class="col-md-1 col-sm-1">
+						<button type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</section>
+</div>
+<!--MAIN END-->
+<!-- <script src="../../scripts/form.js"></script> -->

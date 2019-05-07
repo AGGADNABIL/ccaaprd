@@ -1,0 +1,251 @@
+<style>
+  .ng-table-pager {
+    display: none;
+  }
+  .label {
+    font-size: 10px;font-weight: 400; text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    padding: .2em .6em .3em;"
+  }
+  .bg-success {
+    background-color: #5cb85c !important;
+    color: white !important;
+  }
+  .bg-lightred {
+    background-color: #e05d6f !important;
+    color: white !important;
+  }
+  .st-selected > td {
+  background: aliceblue;
+}
+
+</style>
+
+
+<!--MAIN START-->
+<div id="main" >
+  <!--RECENT JOB SECTION START-->
+  <div id="JobsListAdminMyCtrl" ng-controller="JobsListAdminMyCtrl">
+  <section class="recent-row padd-tb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div id="content-area" style="width:100% !important;">
+
+            <form>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+                  <input type="text" class="form-control" placeholder="Search..." ng-model="searchQuery">
+
+                </div>
+              </div>
+            </form>
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="lead">Liste des offres :</span>       
+              </div>
+              <div class="panel-heading">
+                
+                <span class="lead"><button class="btn btn-danger btn-sm" id="deleteAll" title="del">
+                <span class="fa fa-trash fa-lg"></span><strong> Supprimer la seléction</strong></button></span>
+                <!-- <span style="float: left;">
+								 <div class="dropdown">
+								     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								         <i class=""></i>Export table to...
+								         <span class="caret"></span>
+								     </button>
+								     <ul class="table-export dropdown-menu" table-selector="'table'"  aria-labelledby="dropdownMenu1">
+								          export-options="{type: 'pdf', escape: true, ignoreColumn : '[3,4]', tableName: 'Aanhefs' }" 
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'pdf',escape:'false',pdfFontSize:'7',ignoreColumn:'[0,7]',pdfLeftMargin:'0',pdfLeftPadding:'0'} );">PDF</a>
+								         </li>
+								         <li>
+								             <a href="" id="exportButton">PDF</a>
+								         </li>
+										
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'excel',escape:'false',ignoreColumn:'[0,7]',tableName: 'Liste_offres'});">Excel</a>
+								         </li>
+								
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'csv',escape:'false',ignoreColumn:'[0,7]',tableName: 'Liste_offres'});">CSV</a>
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'xml',escape:'false',ignoreColumn:'[0,7]',tableName: 'Liste_offres'});">XML</a>
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'json',escape:'false',ignoreColumn:'[0,7]',tableName: 'Liste_offres'});">JSON</a>
+								         </li>
+								     </ul>
+								 </div>
+							 
+                </span> -->
+               
+                <span class="lead pull-right"><button class="btn btn-primary btn-sm" ui-sref="app.admin.jobs.new"><span class="fa fa-plus fa-lg"></span><strong> Nouveau</strong></button></span>
+              </div>
+              <table infinite-scroll="getMoreData()" id="tableID" ng-table="tableParams" class="table table-bordered table-striped table-condensed">
+                <thead class="thead-default">
+                    <tr> 
+                      <th>
+	                      <input type="checkbox" id="selectAll"/>
+ 					  </th> 
+                     <th>
+                        Titre
+                     </th>
+                     <th>
+                     <label>DatePublication</label>
+                     </th>
+                     <th><label>DateExpiration</label>
+                     </th>
+                     <th><label>Status</label>
+                     </th>
+                     <th><label>Postulant</label>
+                     </th>
+                     <th><label>Vue</label>
+                     </th>
+                     <th></th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                  <tr id="entry_{{entry.codeOffre}}" ng-repeat="entry in data | orderBy:sortType:sortReverse | filter:searchQuery |orderBy:'-dateCreation'" >
+                  
+                  <td>
+                         <input type="checkbox" id="enty_{{entry.codeOffre}}" value="{{entry.codeOffre}}"  />
+                  </td>
+                  <td sortable="'titre'" style="max-width: 300px;">
+                    <strong>{{entry.titre}}</strong>
+                  </td>
+                  <td  sortable="'datePublication'">
+                    {{entry.datePublication | date : 'yyyy-MM-dd'}}
+                  </td>
+                  <td  sortable="'dateExpiration'">
+                    {{entry.dateExpiration | date : 'yyyy-MM-dd'}}
+                  </td>
+                  <td  sortable="'etat'">
+                    <a ng-click="changeEtat(entry, $event)"
+                       class="label"
+                       ng-class="{'bg-success':entry.etat==true,'bg-lightred':entry.etat==false}">
+                      <span ng-if="entry.etat == true">Activé</span>
+                      <span ng-if="entry.etat == false">Désactivé</span>
+                    </a>
+                  </td>
+                  <td sortable="'nombrePostulant'">
+
+                    <button class="btn btn-default btn-sm" ng-click="nbPostulant(entry.codeOffre)">{{entry.nombrePostulant}}</button>
+                  </td>
+                  <td  sortable="'nombreVue'">
+                    {{entry.nombreVue}}
+                  </td>
+                  <td>
+                    <button class="btn btn-default btn-sm" ng-click="update(entry.codeOffre)"><span class="fa fa-pencil"></span></button>
+                    <button class="btn btn-danger btn-sm" ng-click="remove(entry.codeOffre)"><span class="fa fa-trash"></span></button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+  <!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+<!-- <script type="text/javascript">
+    jQuery(function ($) {
+        
+    });
+</script>
+ -->
+
+<script type="text/javascript">
+$(document).ready(function (){
+	
+	$("#exportButton").click(function () {
+        // parse the HTML table element having an id=exportTable
+       
+        var dataSource = shield.DataSource.create({
+            data: "#tableID",
+            schema: {
+                type: "table",
+                fields: {
+                	Titre: { type: String },
+                	DatePublication: { type: Date },
+                	DateExpiration: { type: Date },
+                	 Postulant: { type: Number },
+                	Vue: { type: Number }  
+                }
+            }
+        });
+        dataSource.read().then(function (data) {
+            var pdf = new shield.exp.PDFDocument({
+                author: "PrepBootstrap",
+                created: new Date()
+            });
+            pdf.addPage("a4", "portrait");
+            pdf.table(
+                15,
+                15,
+                data,
+                [
+                    { field: "Titre", title: "Titre", width: 120 },
+                    { field: "DatePublication", title: "Date Publication", width: 120 },
+                    { field: "DateExpiration", title: "Date Expiration", width: 120} ,
+                   { field: "Postulant", title: "Postulant", width: 80 },
+                    { field: "Vue", title: "Vue", width: 80 } 
+                ],
+                {
+                    margins: {
+                        top: 50,
+                        left: 50
+                    }
+                }
+            );
+
+            pdf.saveAs({
+                fileName: "liste_offres"
+            });
+        });
+    });
+	
+	$('#selectAll').click(function(e){
+		var table= $(e.target).closest('table');
+		$('td input:checkbox',table).prop('checked',e.target.checked);
+	});
+	
+	$('#deleteAll').click(function(event){
+		 
+		 var tb = $(this).attr('title');
+		    var sel = false;
+		    var ch = $('table').find('tbody input[type=checkbox]');
+		      ch.each(function(){
+		         var $this = $(this);
+		            if($this.is(':checked')) {
+		            	//supprimer
+		            	angular.element('#JobsListAdminMyCtrl').scope().supprimer($this.val());
+		                $this.parents('tr').fadeOut(function(){
+		                $this.remove(); //remove row when animation is finished7
+		                console.log('$this.val() :'+$this.val())
+		                });
+		            }
+		      }); 
+		      
+		      $('#selectAll').prop('checked',false);
+		      
+		     // var myheader = $('table').find('thead input[type=checkbox]'); 
+		     //$('#selectAll').attr('ng-checked',false);
+		    //  $("input:checkbox:not(:checked)");
+		    return false;
+		
+		});
+});
+
+
+</script>

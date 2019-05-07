@@ -1,0 +1,160 @@
+<style type="text/css">
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto 0 auto;
+  border-radius: 4px;
+}
+
+.slider ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  list-style: none;
+}
+
+.slider ul li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  height: 300px;
+  background: #ccc;
+  text-align: center;
+  line-height: 300px;
+}
+
+a.control_prev, a.control_next {
+  position: absolute;
+  top: 30%;
+  z-index: 999;
+  display: block;
+  padding: 4% 3%;
+  width: auto;
+  height: auto;
+  /* background: #2a2a2a; */
+  color:blue;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+   opacity: 0.8; 
+  
+}
+
+a.control_prev:hover, a.control_next:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+a.control_prev {
+  border-radius: 0 2px 2px 0;
+}
+
+a.control_next {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+.banner-2 {
+   padding: 0px 0px !important; 
+}
+#header.header-2 #nav {
+	
+	/*margin-right: 5%; */
+
+} 
+.banner-2.banner-3 {
+ background-color: #ffffff !important; 
+}
+#header.header-2 #nav li a {
+    color: #337ab7 !important;
+    font-weight: bold;
+}
+/* div {
+margin: 0 0 0 0 !important;
+padding: 0 0 0 0 !important;
+} */
+</style>
+<!--BANNER START-->
+<!-- <div class="banner-outer banner-2 banner-3" id="conteneur-header"  ng-controller="appController"> 
+	<div class="banner-2 banner-3"> 
+	 
+	<section class="process-section">
+		<div class="container">
+		   
+			<div id="content" >
+			
+            
+			<div higgidy-carousel='images' timeout="10000">
+				<ul higgidy-carousel-images>
+					<li ng-repeat="image in images"><a href="{{image.link}}">
+							<img ng-src="{{image.src}}" alt="{{img.alt}}" style=" height: 280px;max-height: 280px; " />
+					</a></li>
+				</ul>
+				<nav class="links">
+					<ul>
+						<li ng-repeat="image in images"><a href=""
+							ng-click="show($index)"
+							ng-class="{selected: carousel.current == $index}"> {{$index}}
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+          </div>
+          </div>
+          </section>
+		
+	</div>
+	
+</div> -->
+
+
+
+<!--BANNER END-->
+<!-- <script type="text/javascript">
+jQuery(document).ready(function ($) {
+
+	
+		var slideCount = $('.slider ul li').length;
+		var slideWidth = $('.slider ul li').width();
+		var slideHeight = $('.slider ul li').height();
+		var sliderUlWidth = slideCount * slideWidth;
+		
+		$('.slider').css({ width: slideWidth, height: slideHeight });
+		
+		$('.slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+		
+	    $('.slider ul li:last-child').prependTo('.slider ul');
+
+	    function moveLeft() {
+	        $('.slider ul').animate({
+	            left: + slideWidth
+	        }, 200, function () {
+	            $('.slider ul li:last-child').prependTo('.slider ul');
+	            $('.slider ul').css('left', '');
+	        });
+	    };
+
+	    function moveRight() {
+	        $('.slider ul').animate({
+	            left: - slideWidth
+	        }, 200, function () {
+	            $('.slider ul li:first-child').appendTo('.slider ul');
+	            $('.slider ul').css('left', '');
+	        });
+	    };
+
+	    $('a.control_prev').click(function () {
+	        moveLeft();
+	    });
+
+	    $('a.control_next').click(function () {
+	        moveRight();
+	    });
+
+	}); 
+</script>
+ -->

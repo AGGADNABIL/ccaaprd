@@ -1,0 +1,162 @@
+ <style type="text/css">
+ .conteneur {
+    float: right;
+    display: block;
+ }
+ 
+ div.text-box , .spacer{
+   padding-left: 30px; 
+ }
+ 
+ h4 {
+    padding:0 20px ; 
+ }
+ 
+ h2 {
+  padding-top:0px;
+ }
+ 
+ .picture {
+	max-width: 80px;
+	max-height: 80px;
+	border-radius: 10px;
+	 overflow: hidden; 
+	
+}
+
+.padd{
+   padding-top: 3px !important;
+   position: relative;
+}
+.pic {
+	width: 70px;
+	height: 70px;
+	border-radius: 10px;
+	/* border: 1px dotted #ccc; */
+}
+.thumbe{
+ max-width: 300px;
+
+
+} 
+.box {
+padding: 10px 5px 5px !important;
+}
+#imag{
+   width: 250px;
+}
+</style>
+
+
+  <!--MAIN START-->
+ <div id="main">
+    <!--RECENT JOB SECTION START-->
+    <section class="resumes-section padd-tb">
+      <div class="container" ng-controller="ViewAllCondidatures" >
+      
+      
+      
+        <div class="row">
+          <div class="col-md-9 col-sm-8">
+            <div class="resumes-content">
+                <h2>Mes Candidatures :</h2>
+            
+            <div >
+              <div class="box" ng-repeat="offre in offres |orderBy:'-dateCreation'|filter:{etat:'true'}" ><!-- ng-repeat="offre in offres" -->
+              <div class="frame"><a href="#"></a></div> 
+                <div class="text-box" >
+                  <h4 style="float: left;"><a20px;"><a ng-click="nbVueIncrement(offre.titre,offre.codeOffre)" href="">{{offre.titre}}</a></h4><br style="clear: both;"/>
+                  <fieldset>
+	                <div class="row">
+	                <table style="width:100%;">
+						<tr>
+							<td class="padd">
+								<div class="picture">
+									<img src="images/career.jpg" class="pic" ></img>
+								</div>
+							</td>
+						    <td><div  style="border-left: 8px solid #ccc;padding: 5px 15px;margin-left: 10px;min-height: 80px;">
+	                                  <p><span ng-bind-html="offre.poste | unsafe | limitHtml:260"></span><a ng-click="nbVueIncrement(offre.titre,offre.codeOffre)"  href="">[...]</a></p>
+                           </div></td>
+						</tr>
+						<tr>
+						  <td style="width:10%;" ></td>
+						  <td class="spacer" style="width:80%;" >
+						  		<div class="clearfix" > <strong><i class="fa fa-map-marker"></i>{{offre.ville.nomVille}}</strong> <strong><i class="fa fa-calendar"></i> Publiée le : {{offre.datePublication | date:'dd-MM-yyyy'}}</strong></div>
+						  </td>
+						  <td style="width:10%;"><div class="btn-row "> <a class="contact" href="" ng-click="nbVueIncrement(offre.titre,offre.codeOffre)" >Détails</a></div></td>
+						  
+						
+						</tr>
+					</table>
+		                
+		                
+                    </div>
+                 </fieldset>
+                  
+                  <!-- <div class="tags"> <a href="#"><i class="fa fa-tags"></i>Product Management,</a> <a href="#">Graphic Design,</a> <a href="#">HTML,</a> <a href="#">Development,</a> <a href="#">WordPress,</a> <a href="#">Content</a> </div> -->
+               <div class="conteneur">
+                  	
+                 </div>
+                </div>
+              </div>
+           </div><!-- pour controller -->
+              <div id="loadMore"> <a href="#" class="load-more"><i class="fa fa-user"></i>Load More Jobs</a></div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-4">
+            <h2>Conseil IT</h2>
+
+            <aside>
+            
+              <div class="sidebar" >
+                <div class="box">
+                  <div class="thumbe"> <a href="#"><img id="imag" src="images/cappp.PNG" alt="img"></a>
+                  </div>
+                  <div class="text-box"> <a href="#" class="btn-time">Freelance</a>
+                     <h4>Professionnalisme, Compétence et Expérience...</h4>
+ <span>Telle est la ligne de conduite que nos consultants respectent toujours lors de l'étude et de l'implémentation d'un projet. Nos intervenants possèdent des profils variés. Nous nous adaptons aisément à votre mode travail pour vous fournir la compétence la plus approriée aux différentes étapes du projet.</span> 
+                    
+                     </div>
+                </div>
+                
+                <!-- <h2>Derniers missions :</h2>
+                <div class="sidebar-jobs" ng-controller="OffresController">
+                  <ul>
+                     <li ng-repeat="o in offres | orderBy:'-datePublication' | limitTo:5"> 
+                    		<span><a href="" ng-click="nbVueIncrement(o.titre,o.codeOffre) | replaceSpaces ">{{o.titre}}</a> {{o.titre | replaceSpaces }} <span style="float: right;position: relative;"> Experience de {{o.niveauExperience}} et plus.</span></span>
+                     </li>
+                  </ul>
+                </div> -->
+                
+                   <h4>Notre objectif:</h4>
+							<div class="sidebar-jobs">
+								<ul>
+									<li><span>Optimiser la gestion de l'information au
+											sein de votre entreprise.</span></li>
+									<li><span>Vous guider dans vos choix lors de la
+											mise en oeuvre de solutions destinées à valoriser vos données
+									</span></li>
+									<li><span>Vous accompagner dans l'utilisation de
+											nos produits afin d'exploiter pleinement les technologies
+											mises à votre disposition. </span></li>
+									<li><span>Vous assister dans la résolution
+											d'éventuels problèmes techniques ou fonctionnels. </span></li>
+									<li><span>Vous suivre dans l'évolution de vos
+											besoins et dans la conduite du changement. </br>
+										</br>
+										</br>
+									</span></li>
+								</ul>
+							</div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!--RECENT JOB SECTION END--> 
+  </div>
+  <!--MAIN END--> 
+  

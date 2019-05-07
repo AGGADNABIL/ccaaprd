@@ -1,0 +1,120 @@
+<!--FOOTER START-->
+<style type="text/css">
+ body {
+ /* font-family: 'BenchNine', sans-serif; */
+ }
+ a.footers {
+  font-size: 14px !important;
+ }
+</style>
+<footer id="footer">
+
+	<div class="col-md-3">
+		<h4>A propos de nos services:</h4>
+		<ul>
+			<li><a href="" class="footers" ui-sref="app.prodETInfras">Production et infrascructures</a></li>
+			<li><a href="" class="footers" ui-sref="app.ConseilExpertise">Conseil et Expertise</a></li>
+			<li><a href="" class="footers" ui-sref="app.quiSommesNous">Qui sommes nous?</a></li>
+			<li ui-sref-active="active" ><a ui-sref="app.jobsList({typeContrat: null, ville: null, competence: null})"
+								data-ui-sref-opts="{reload: true}" >Carrière</a></li>
+			<li><a href="" class="footers" ui-sref="app.contact">Contact</a></li>
+		</ul>
+	</div>
+   <div class="col-md-6" ng-show="$state.current.name === 'app.jobsList'">
+	<!-- <div class="row" style="text-align: center;">
+	   <h3>Liste des Mots clés par :</h3>
+	</div> -->
+	
+	<div class="col-md-4 col-sm-4">
+		<h4>compétences</h4>
+		<ul>
+			<li ng-repeat="c in listCompetences | limitTo:5">
+			<a href="" class="footers"
+         ng-click="search(null,null,c.competence.titre)">{{c.competence.titre}}</a></li>
+		</ul>
+	</div>
+	<div class="col-md-4 col-sm-4">
+		<h4>régions</h4>
+		<ul>
+			<li ng-repeat="offre in listvilles | limitTo:5"><a href=""  class="footers"
+				ng-click="search(null,offre.ville.nomVille,null)">{{offre.ville.nomVille}}</a></li>
+		</ul>
+	</div>
+	<div class="col-md-4 col-sm-4">
+		<h4>contrat</h4>
+		<ul>
+			<li ng-repeat="offre in offres | limitTo:5"><a href="" class="footers"
+				ng-click="search(offre.typeContrat.titre,null,null)">{{offre.typeContrat.titre}}</a></li>
+		</ul>
+	</div>
+	</div>
+	<div class="col-md-6" ng-show="$state.current.name !== 'app.jobsList'">
+	<!-- <div class="row" style="text-align: center;">
+	   <h3>Liste des Mots clés par :</h3>
+	</div> -->
+	<div class="col-md-6 col-sm-6">
+		<h4>Service :</h4>
+		<div ng-controller="InfosSup">
+		<ul>
+				<li ng-repeat="infos in donnees | limitTo:5"><a href=""  class="footers" ui-sref="app.information{{infos.id}}"
+				ng-click="dynamic(infos)">{{ infos.titre }}</a></li>
+			</ul>
+		
+		</div>
+		
+	</div>
+	<div class="col-md-6 col-sm-6">
+		<h4>Métier :</h4>
+		<div ng-controller="MetierSup">
+			<ul>
+				<li ng-repeat="metier in dataAll | limitTo:5">
+				<a href="" class="footers" ui-sref="app.metier{{metier.id}}" ng-click="dynMetier(metier)">
+					{{ metier.titre }}</a></li>
+			</ul>
+		</div>
+		
+	</div>
+	<!-- <div class="col-md-4 col-sm-4">
+		<h4>contrat</h4>
+		<ul>
+			<li ng-repeat="offre in offres | limitTo:5"><a href="" class="footers"
+				ng-click="search(offre.typeContrat.titre,null,null)">{{offre.typeContrat.titre}}</a></li>
+		</ul>
+	</div> -->
+	</div>
+	
+	
+	<div class="col-md-3">
+		<form  ng-submit="subscribe()" 
+			style="width: 100% !important;">
+			<h4>Abonnez-vous pour Dernieres Emplois-Alertes</h4>
+			<input type="text" placeholder="Nom" ng-model="name" required>
+			<input type="text" placeholder="Email" ng-model="email" required>
+			<input type="submit" value="Abonnez">
+			<p style="color: red;" ng-show="subscribeError">{{subscribeMessage}}</p>
+			<p style="color: green;" ng-show="!subscribeError">{{subscribeMessage}}</p>
+		</form>
+	</div>
+
+	<div class="container">
+		<div class="bottom-row">
+			<strong class="copyrights">Capvalue &copy; 2016,Tous les
+				droits réservés <a href="http://www.capvalue.net/" target="_blank">Capvalue</a>
+			</strong>
+			<div  class="footer-social ">
+				<!-- <div style="font-family: 'BenchNine', sans-serif;font-size:10px;padding-left: 0;">
+					<a href="" ui-sref="app.home">Acceuil</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" ui-sref="app.quiSommesNous">Qui nous sommes</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+						href="" >Conditions d'utilisation</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+						href="" ui-sref="app.contact">Contact</a>
+				</div> -->
+				<ul>
+					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+<!--FOOTER END-->

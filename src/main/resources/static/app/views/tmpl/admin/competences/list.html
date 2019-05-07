@@ -1,0 +1,266 @@
+<style>
+.ng-table-pager {
+	display: none;
+}
+
+.label {
+	font-size: 10px;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+	padding: .2em .6em .3em;
+	"
+}
+
+.enable {
+	color: #cc2a23;
+}
+
+.disable {
+	color: #5cb85c;
+}
+
+.remove {
+	color: #ffa90f;
+}
+
+.edit {
+	color: #4077cc;
+}
+
+.action-buttons {
+	margin: 0px 5px 0px 5px;
+	cursor: pointer;
+}
+  .control-label {
+    padding-top: 7px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  input[type="date"] {
+    float: left;
+    width: 100% !important;
+    height: 43px !important;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 20px !important;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0 0 28px 0 !important;
+    font: 400 14px/14px 'Roboto', sans-serif;
+    color: #666;
+  }
+
+  .remove-comp {
+    background: #C76868;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 35px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 100%;
+    height: 35px !important;
+    width: 35px !important;
+    margin-top: 3px !important;
+  }
+
+  .add-comp {
+    background: #3ac749;
+    color: #FFF;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 100%;
+    height: 35px !important;
+    width: auto !important;
+   
+  }
+ .register {
+    background: #1b8af3;
+    color: #FFF;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 100%;
+    height: 40px !important;
+    width: auto !important;
+    margin-bottom: 40px;
+  }
+  #competence {
+  margin-bottom: 4px;
+  }
+</style>
+<!--MAIN START-->
+<div id="main" ng-controller="CompetencesListAdminCtrl"> <!-- CompetencesListAdminCtrl  -->
+	<!--RECENT JOB SECTION START-->
+	<section class="recent-row padd-tb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div id="content-area" style="width: 100% !important;">
+
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-search"></i>
+									</div>
+
+									<input type="text" class="form-control" placeholder="Search..."
+										ng-model="searchQuery">
+
+								</div>
+							</div>
+						</form>
+						<div class="panel panel-default" >
+							<div class="panel-heading" ng-controller="AddComptence">
+								<form class="form-horizontal" role="form" >
+									<span class="lead">Liste des compétences :</span> <span
+										class="lead pull-right"><button id="newCompetence"
+											class="btn btn-primary btn-sm" slide-toggler="#dreppred"><!--  -->
+											<span class="fa fa-plus fa-lg"></span><strong>
+												Nouveau</strong>
+										</button></span>
+									<div id="boxer" class="box" style="height: auto !important;" >
+										<div id="dreppred" class="slider" ><!--  -->
+											<div class="form-group">
+												<label for="titre" class="col-sm-3 col-xs-3 control-label">Groupe
+													de Comptences : </label>
+												<div class="col-sm-6 col-xs-6">
+													<input class="form-control"  type="text" ng-model="titre">
+												</div>
+												<div class="col-sm-3 col-xs-3"></div>
+											</div>
+										   <div class="form-group" id="frmGrp">
+										   
+										    <label class="col-sm-3 col-xs-3 control-label">Competence(s)
+												<span class="text-danger" style="font-size: 15px;">* </span>:
+											</label>
+											 <div  ng-repeat="choice in choices"> 
+												<label class="col-sm-3 col-xs-3 control-label"></label>
+												
+													<div class="col-sm-9 col-xs-9">
+										                <div class="col-sm-5 col-xs-5">
+															<!-- <select 
+															style="width: auto !important;"
+															ng-model="choice.competence.codeCompetence"
+															ng-options="competence.id as competence.titre group by competence.group for competence in competences">
+														   </select> -->
+														   <input class="form-control" id="competence" type="text" ng-model="choice.titre">
+														  </div>
+														  <div class="col-sm-3 col-xs-3">
+														    <button class="remove-comp " ng-hide="$first"
+															ng-click="choices.splice($index, 1)" >-</button>
+														  </div>
+													</div>
+										  </div>
+										</div>
+										
+										<div class="form-group">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-9 col-xs-9">
+												 <button class="add-comp" id="myIdd"  ng-hide="$first"  ng-click="add($event)" >Ajouter
+													compétence</button> <!-- -->
+											</div>
+										 </div>
+										
+										 <div class="row">
+								          <div class="col-sm-12 col-xs-12">
+								            <div class="btn-col">
+								              <input type="submit" class="pull-right register" value="Enregistrer" ng-click="register()" />
+								            </div>
+								          </div>
+       									 </div>
+									  </div>
+									</div>
+								</form>
+							</div>
+							
+
+							<div class="box">
+
+								<table infinite-scroll="getMoreData()" ng-table="tableParams"
+									class="table table-bordered table-striped table-condensed">
+									<tr id="entry_{{entry.codeGroupCompetence}}"
+										ng-repeat="entry in data | orderBy:sortType:sortReverse | filter:searchQuery">
+										<td data-title="'Groupe'" sortable="'titre'"
+											style="max-width: 300px;"><strong>{{entry.titre}}</strong>
+										</td>
+
+										<td data-title="'Competences'">
+											<ul>
+												<li id="competence_{{competence.codeCompetence}}"
+													ng-repeat="competence in entry.competences">
+													{{competence.titre}} <a class="pull-right action-buttons"
+													ng-click="changeEtat(competence, $event, !competence.activated)">
+														<span
+														ng-class="{'fa fa-unlock-alt disable':competence.activated==true,'fa fa-lock enable':competence.activated==false}">
+													</span>
+												</a> <a class="pull-right action-buttons"
+													ng-click="updateCompetence(competence)"><span
+														class="fa fa-pencil edit"></span></a> <a
+													class="pull-right action-buttons"
+													ng-click="removeCompetence(competence.codeCompetence)"><span
+														class="fa fa-trash remove"></span></a>
+												</li>
+											</ul>
+										</td>
+										
+										<td>
+											<button class="btn btn-default btn-sm"
+												ng-click="update(entry)">
+												<span class="fa fa-pencil"></span>
+											</button>
+											<button class="btn btn-danger btn-sm"
+												ng-click="remove(entry.codeGroupCompetence)">
+												<span class="fa fa-trash"></span>
+											</button>
+											<button class="btn btn-primary btn-sm"
+												ng-click="addCompetToGrp(entry.codeGroupCompetence)">
+												<span class="fa fa-plus"></span>
+											</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+<script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="scripts/jquery.easing-1.3.js"></script>
+<script type="text/javascript">
+  $(function(){
+	  
+	 /*  $('#boxer').css('height':'0px');
+	  $('#newCompetence').click(function(){
+		  console.log(" réussi ");
+		   // alert('bien');
+		    $('#boxer').animate({height: '300'}, 2000);
+		    //This method keeps increasing the height by 36px
+		}); */
+		
+	  $('#myIdd').click(function(){
+		
+		    $('#boxer').animate({height: '+=50'}, 1000);
+		    
+		});
+	  
+	  
+  });
+</script>

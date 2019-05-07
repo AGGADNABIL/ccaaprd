@@ -1,0 +1,49 @@
+<!--MAIN START-->
+<div id="main">
+
+
+  <!--SIGNUP SECTION START-->
+  <section class="signup-section">     
+    <div class="container">
+      <div class="holder">
+        <div class="thumb"><img src="images/capvalue.jpg" alt="img"></div>
+        <div ng-show="register"><p style="color: green;font-size: 18px;"> Un message d'activation a été  envoyé à votre adresse e-mail</p></div>
+        <form ng-submit="registerMe()">
+          <div class="input-box"> <i class="fa fa-user"></i>
+            <input id="nom" name="nom" ng-model="nom" type="text" placeholder="nom" required>
+          </div>
+          
+          <div class="input-box"> <i class="fa fa-user"></i>
+            <input id="lastname" name="lastname" ng-model="prenom" type="text" placeholder="prenom" required>
+          </div>
+          
+          <div class="input-box"> <i class="fa fa-envelope"></i>
+            <input id="email" name="email" ng-model="username" type="email" placeholder="Email ou login" required>
+          </div>
+          
+          <div class="input-box"> <i class="fa fa-unlock"></i>
+            <input id="password" name="password" ng-model="password" type="password" placeholder="Mot de passe" required>
+          </div>
+          <div class="input-box"> <i class="fa fa-unlock"></i>
+            <input id="passwordConfirm" name="passwordConfirm" ng-model="passwordConfirm" type="password" placeholder="Confirmer votre mot de passe" required>
+          </div>
+          <div class="check-box">
+            <input id="id3"  ng-model="verification" type="checkbox" required/>
+            <strong>En vous inscrivant, vous acceptez les <a ui-sref="app.our-terms">Conditions d'utilisation</a> et la <a ui-sref="app.privacy-policy">Politique de confidentialité</a></strong>
+          </div>
+          <input type="submit" value="S'inscrire"> <br>
+          <p class="help-block" style="color: #ff635d; !important;">
+				<span ng-show="errors">Les mots de passe ne sont pas identiques</span>
+		  </p>
+		  <p class="help-block" style="color: #ff635d; !important;">
+				<span ng-show="emailError && !errors">{{usernameConflict}}</span>
+		  </p>
+        </form>
+        <div>Vous avez déjà un compte? <a ui-sref="app.login">Connexion</a></div>
+      </div>
+    </div>
+  </section>
+  <!--SIGNUP SECTION END-->
+
+</div>
+<!--MAIN END-->

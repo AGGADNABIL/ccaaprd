@@ -1,0 +1,38 @@
+<style>
+  .ng-table-pager {
+    display: none;
+  }
+  .label {
+    font-size: 10px;font-weight: 400; text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    padding: .2em .6em .3em;"
+  }
+  .bg-success {
+    background-color: #5cb85c !important;
+    color: white !important;
+  }
+  .bg-lightred {
+    background-color: #e05d6f !important;
+    color: white !important;
+  }
+</style>
+<!--MAIN START-->
+<div id="main" ng-controller="NewJobAdminCtrl">
+  <!--RECENT JOB SECTION START-->
+  <section class="recent-row padd-tb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div id="content-area" style="width:100% !important;">
+            <div ng-include="'views/tmpl/admin/jobs/_form.html'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+

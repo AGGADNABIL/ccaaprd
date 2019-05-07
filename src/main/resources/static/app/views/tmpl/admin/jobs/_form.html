@@ -1,0 +1,485 @@
+<style>
+  .control-label {
+    padding-top: 7px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  input[type="date"] {
+    float: left;
+    width: 100% !important;
+    height: 43px !important;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 20px !important;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0 0 28px 0 !important;
+    font: 400 14px/14px 'Roboto', sans-serif;
+    color: #666;
+  }
+
+  .remove {
+    background: #C76868;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 35px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 100%;
+    height: 35px !important;
+    width: 35px !important;
+    margin-top: 3px !important;
+  }
+
+  .add {
+    background: #3ac749;
+    color: #FFF;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 100%;
+    height: 35px !important;
+    width: auto !important;
+  }
+  .padd-bas {
+      padding-bottom: 30px;
+      }
+      .spacer {
+      margin-bottom: 5px !important;
+      }
+      
+     ul {
+  cursor: pointer;
+  
+  /* clear: both;
+  list-style-type: none;
+  width: 350px; */
+  
+}
+ul#newGrp {
+ width: 100% !important;
+ d/* isplay: none; */
+}
+.input-group-btn {
+  position: static;
+}
+.dropdown-menu {
+  left: 0;
+}
+.remove {
+    background: #C76868;
+    color: #FFF;
+  
+    font-size: 12px;
+    border: 0;
+    cursor: pointer;
+    height: 15px !important;
+    width: 15px !important;
+    float: right;
+    margin-right: 30%;
+}
+.plus {
+    text-align: center;
+    display: inline;
+    overflow: hidden;
+    margin-right: 10%;
+    position: relative;
+    top: 10px;
+}
+
+	.act {
+	background-color: #1b8af3; 
+	color:white;
+	font: 900 14px/14px 'Roboto', sans-serif;
+	}
+	#save{
+		margin:10px 20px 0px 30px;
+		background-color: #1b8af3; 
+		color:white;
+		font: 900 14px/14px 'Roboto', sans-serif;
+	}
+	
+	#spanMoins {
+	display: inline;
+    float: right;
+    max-width: 40px;
+    margin-right: 22%;
+    }
+    .resum-form label {
+    margin: 0px !important;
+    }
+   .new-grp-cpt{
+    background-color: #1b8af3;
+    padding: 5px;
+    font: 900 14px/14px 'Roboto', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 3px;
+    }
+</style>
+ 
+<!--MAIN START-->
+  
+<div id="main">
+  <!--JOB FORM START-->
+  <section class="resum-form">
+    <div class="container-fluid padd-bas">
+        
+       
+      <form ng-submit="save()">
+
+        <div class="form-group">
+          <label for="titre" class="col-sm-3 control-label">Titre <span class="text-danger"
+                                                                        style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <input id="titre"
+                   type="text"
+                   name="titre"
+                   class="form-control"
+                   ng-model="offre.titre"
+                   
+            /><!-- value="{{offre.titre}}" -->
+            <!-- <button ng-click="addTitle()">submit</button> -->
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="poste" class="col-sm-3 control-label">Poste <span class="text-danger"
+                                                                        style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <div style="margin: 0 0 28px 0 !important;">
+               
+				 <textarea  id="poste" name="poste" ui-tinymce="tinymceOptions" ng-model="offre.poste"></textarea>
+                
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="profilRecherche" class="col-sm-3 control-label">Profil recherché <span class="text-danger"
+                                                                                             style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <div style="margin: 0 0 28px 0 !important;">
+              <textarea value="profilRecherche" id="profilRecherche" name="profilRecherche" ui-tinymce="tinymceOptions"
+                        ng-model="offre.profilRecherche"></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- {{ville}} -->
+        
+       <!--  <div class="form-group spacer">
+          <label for="dureeMission" class="col-sm-3 control-label">Competence <span class="text-danger"
+                                                                                       style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9 ">
+            <select data-placeholder="Competences" 
+                     name="provinceEps" 
+                    id="provinceEps"
+                    ng-options="competence.codeCompetence as competence.titre for competence in competences"
+                     ng-model="competence">
+            </select>
+                <div ng-repeat="choice in choices">
+                  <select
+                    ng-model="choice.competence.codeCompetence"
+                    ng-options="competence.id as competence.titre group by competence.group for competence in competences">
+                  </select>
+              </div>
+          </div>
+        </div>
+ -->
+ 
+ 
+        <div class="form-group">
+          <label for="dateDebutMission" class="col-sm-3 control-label">Début de la mission <span class="text-danger"
+                                                                                          style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <input type="date" id="dateDebutMission" class="form-control"
+             ng-model="dateDebutMission" value="{{ dateDebutMission }}" data-polyfill="all" />
+          </div>
+           <div class="form-group">
+          <label for="dureeMission" class="col-sm-3 control-label">Durée de la mission <span class="text-danger"
+                                                                                          style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <select ng-model="offre.dureeMission">
+							 <option  ng-repeat="m in dureeMissions" value="{{m}} ">{{m}}</option>
+													  
+			</select>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="niveauExperience" class="col-sm-3 control-label">Niveau d'expérience requis <span
+            class="text-danger" style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <select ng-model="offre.niveauExperience">
+							 <option  ng-repeat="n in niveauExperiences" value="{{n}} ">{{n}}</option>									  
+			</select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="datePublication" class="col-sm-3 control-label">Date de publication <span class="text-danger"
+                                                                                                style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <input type="date" ng-model="datePublication"  value="{{ datePublication | date:'dd-MM-yyyy' }}" data-polyfill="all">
+           
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Date d'expiration <span class="text-danger"
+                                                                                             style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <input type="date" ng-model="dateExpiration" value="{{ dateExpiration}}"  data-polyfill="all">
+          </div>
+        </div>
+        
+
+       <div class="form-group">
+     <label for="ville" class="col-sm-3 control-label">Lieu de la mission <span class="text-danger"
+                                                                              style="font-size: 15px;">*</span></label>
+      <div class="input-group"  style="padding: 0 15px;">
+      <div class="input-group-btn" style="width: 70%;">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 43px;width: 100%; text-align: left;">sélectionner une ville 
+        <span class="caret" style="float: right;"></span></button>
+        <ul class="dropdown-menu" style="width: 100%;">
+          <li ng-repeat="ville in villes track by ville.codeVille" ng-click="setSelected(ville)" ng-class="{selected : ville.codeVille === idSelectedVote}"> <!-- (isExists(idSelectedVote) ? idSelectedVote : savedVille.codeVille) -->
+          <span style="padding-left: 20px;">{{ ville.nomVille }} </span>
+          </li>
+        </ul>
+      </div>
+      
+      <input  type="text" class="form-control"  id="nameV" ng-model="nameVille" placeholder="Ajouter une ville" />
+      <div class="input-group-btn">
+        <button id="addVille" type="button" class="btn pull-right" data-toggle="dropdown" style="height: 43px;" ng-click="addVille(nameVille)" >+</button>
+      </div>
+    
+      <!-- /btn-group --> 
+                       
+    </div>
+     
+  </div>
+
+<!--  -->
+        <div class="form-group">
+          <label for="typeContrat" class="col-sm-3 control-label">Type de contrat <span class="text-danger"
+                                                                                        style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            <select id="typeContrat"
+                    name="typeContrat"
+                    ng-model="offre.typeContrat.codeTypeContrat"
+                    class="form-control"
+                    ng-options="typeContrat.codeTypeContrat as typeContrat.titre for typeContrat in contrats track by typeContrat.codeTypeContrat"
+            >
+              <option value=''>{{offre.typeContrat.titre}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-12 control-label">Competence(s) <span class="text-danger"
+                                                                  style="font-size: 15px;">*</span></label>
+        </div>
+
+     <div  ng-controller="TodoListController">
+        <div class="form-group">
+          <div class="row" ng-repeat="choice in choices">
+            <label class="col-sm-3 control-label"></label>
+            <div>
+              <div class="col-sm-9">
+             
+              <div class="row">
+                <span style="margin-right: 15px;">
+                  Compétence <span class="text-danger"
+                                   style="font-size: 15px;">*</span>
+                  <select
+                    style="width: auto !important;"
+                    ng-model="choice.competence.codeCompetence"
+                    ng-options="competence.id as competence.titre group by competence.group for competence in competences">
+                  </select>
+                  
+                  </span>
+                <span style="margin-right: 15px; display: inline-block; float: none;">
+                  Exp <span class="text-danger"
+                            style="font-size: 15px;">*</span>
+			            <select ng-model="choice.niveauRequis">
+										 <option  ng-repeat="n in niveauExperiences" value="{{n}} ">{{n}}</option>
+																  
+						</select>
+			      </span>
+                  <!-- <span class="text-danger"
+                            style="font-size: 15px;">*</span> <input type="text" 
+                            style="width: auto !important;" ng-model="choice.niveauRequis" name=""> ans     
+               		 </span> -->
+               
+               	<span id="spanMoins">	
+	                <button style="float: right;" class="remove" ng-hide="$first" ng-click="choices.splice($index, 1)">-</button>
+	                <a slide-toggle="#panelgrpcmpt" ng-show="$first" href="">
+	                      <span class="fa fa fa-pencil fa-lg"></span></a>
+                </span>
+             </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-9">
+         <div class="row">
+            <button class="add" ng-hide="$first" ng-click="add($event)">Ajouter compétence</button>
+         </div>     
+	              <div  id="panelgrpcmpt" class="slideable">
+	              <ul id="newGrp"  style="margin: 10px;background-color: #E0E0E0; border-radius: 3px;font: 900 14px/14px 'Roboto', sans-serif;">
+				          <li>
+				              <div class="row" style="margin: 10px;background-color: #E0E0E0; border-radius: 3px;font: 900 14px/14px 'Roboto', sans-serif;">
+				                <div class="col-sm-12">
+				                  <div class="form-group">
+				                    <label class="col-sm-3 control-label" for="name">Groupe :</label>
+				                    <div class="col-sm-9">
+				                      <input class="form-control" ng-model="textGroup" type="text" placeholder="Nouveau groupe de Compétence" />
+				                    </div>
+				                  </div>
+				                </div>
+				              </div>
+				              <div class="row" style="margin: 10px 20px 40px;">
+				                <div class="col-sm-12"  > <!-- ng-controller="TodoListController" -->
+				                  <div>
+				                    <label class="col-sm-3" for="name">Compétence :</label>
+				                    <div class="col-sm-9" style="padding-left: 50px;min-height: 240px;height:240px ;">
+				                     <div class="row">
+					                      <div>
+						                       <input type="text" style="max-width:80%;display: inline;"
+						                         ng-model="todoText" placeholder="Nouvelle Compétence" />
+						                       <a id="addtodo" href="" class="remove plus" ng-click="addTodo()" >+</a><!--  ng-click="addTodo() ng-click="addevnt($event)"" -->
+					                       </div>
+					                 </div>
+				                       <div id="resizable" class="row" style="padding: 5px 30px 0px;min-height: 100px;" >
+				                       <ul>
+									        <li ng-repeat="todo in todos">
+									          <label>
+									             <span>{{todo.titre}}</span> <!-- class="done-{{todo.done}}" -->
+									             <button class="remove" ng-click="todos.splice($index, 1)" ng-hide="$first">-</button>
+									          </label>
+									        </li>
+							      	    </ul>
+				                      </div>
+				                      <div class="row">
+				                      <a href="" class="new-grp-cpt pull-right" ng-click="saveGroupe()">ENREGISTRER</a><!-- btn action-button -->
+				                      </div>
+				                    </div>
+				                  </div>
+				                </div>
+				              </div>
+				          </li>
+				        </ul>
+	              </div>
+          </div>
+        </div>
+       </div>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="btn-col">
+              <input type="submit" class="pull-right" value="Enregistrer">
+              <input type="submit" ui-sref="app.admin.jobs.list" value="Retour">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <!--JOB FORM END-->
+</div>
+
+
+
+<!--MAIN END-->
+        <!-- <div class="form-group">
+          <label for="dateExpiration" class="col-sm-3 control-label">Groupe   <span class="text-danger"
+                                                                                             style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+            	<button type="button" onclick="TestClick2()">click me</button>
+          </div>
+        </div> -->
+
+		<!-- <div class="form-group">
+          <label for="dateExpiration" class="col-sm-3 control-label">Groupe <span class="text-danger"
+                                                                                             style="font-size: 15px;">*</span></label>
+          <div class="col-sm-9">
+          start gmail search 
+            
+  
+    <div class="input-group">
+      <input type="text" class="form-control">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right" style="width: auto;">
+          <li>
+            <form action="#" class="form-horizontal">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="name"></label>
+                    <div class="col-sm-9">
+                      <input class="form-control" id="name" name="input1" type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="name">Input2</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" id="name" name="input2" type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <input class="btn action-button pull-right" name="commit" type="submit" value="Save">
+              </p>
+            </form>
+          </li>
+        </ul>
+        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      </div>
+    </div>
+
+
+  
+
+end search gmail
+          </div>
+        </div> -->
+		
+
+      <!--   <div class="form-group">
+          <label for="ville" class="col-sm-3 control-label">Lieu de la mission <span class="text-danger"
+                                                                                     style="font-size: 15px;">*</span></label>
+          <div class="col-sm-8">
+            <select id="ville"
+                    name="ville"
+                    ng-model="offre.ville.codeVille"
+                    class="form-control"
+                    ng-options="ville.codeVille as ville.nomVille for ville in villes track by ville.codeVille" >
+              <option>
+              		
+              </option>
+              <option value=''>{{offre.ville.nomVille}}</option>
+            </select>
+          </div>
+          
+       </div> -->
+  
+
+
+
+
+

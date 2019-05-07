@@ -1,0 +1,378 @@
+<style type="text/css">
+/* #logocap {
+    width: 280px;
+    top: -30px;
+    max-width: 280px;
+    height: 120px;
+    max-height: 120px;
+} */
+#logocap {
+    width: 280px;
+    top: -15px;
+    max-width: 280px;
+    height: 90px;
+    max-height: 90px;
+}
+.navbar-default .navbar-nav>li>a.meny {
+    font-size: 18px !important;
+    transition: all .7s ease 0s;
+    -webkit-transition: all .7s ease 0s;
+    -moz-transition: all .7s ease 0s;
+    -o-transition: all .7s ease 0s;
+    -ms-transition: all .7s ease 0s;
+    padding: 14px 5px;
+    font-weight: bold;
+    color: #2196F3;
+    line-height: inherit;
+    border-bottom: 1px solid #2196F3;
+}
+.spacer {
+margin-left: 5%;
+
+} 
+
+li a {
+  font: 400 15px/15px 'Roboto', sans-serif;
+}
+#nav  {
+   font: 400 15px/15px 'Roboto', sans-serif;
+} 
+
+
+/* new menu */
+#login-dp {
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow: hidden;
+    background-color: rgba(255,255,255,.8);
+    display: none;
+}
+
+
+/*last menu  */
+ #navbar ul.nav , li.dropdown:hover {
+    border-radius: 5px 5px 0px 0px;
+    color: #FFF;
+}
+#navbar ul li a:hover {
+  color: #fff;
+  background-color:#c4287f ;
+  border-radius: 5px 5px 5px 5px;
+}
+li.dropdown{
+    font-size: 12px;
+    font-style: normal;
+    line-height: 20px;
+    margin-left: 3px;
+    margin-right: 3px;
+    /* text-transform: uppercase; */
+    font-weight: 300;
+    }
+    
+  .noneDeco:hover {
+  background-color: rgba(255,255,255,.8) !important;
+  color: blue !important;
+  
+ }  
+ .noneDeco
+ {
+  margin: 20px 5px !important;
+ }
+</style>
+<!-- new menu -->
+<nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="" ui-sref="app.home"><img
+					src="images/logo/Logo-Capvalue_opt.png" id="logocap"
+					class="col-md-3 col-xs-3" alt="Logo-Capvalue" 
+					 /></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" ng-controller="LoginCtrl">
+              <li class="active"><a href="" ui-sref="app.home">Acceuil</a></li>
+              <li ui-sref-active="active"><a ui-sref="app.quiSommesNous">Qui
+											somme nous ?</a></li>
+									
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  
+					
+			 		 <li ui-sref-active="active"><a
+										ui-sref="app.prodETInfras">Production et infrastructures</a></li>
+					  <li ui-sref-active="active"><a
+										ui-sref="app.ConseilExpertise">Conseil ET Expertise</a></li>				
+									
+                  
+                  <!-- <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li> -->
+                </ul>
+              </li>
+              <li ui-sref-active="active" ng-show="connectedRole !='ROLE_ADMIN'">
+       						 <a ui-sref="app.jobsList({typeContrat: null, ville: null, competence: null})"
+								data-ui-sref-opts="{reload: true}" >Carrière</a></li>
+			    <li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a ui-sref="app.admin.jobs.list">Carrière</a></li>
+								
+								
+              <li class="dropdown" ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_ADMIN'">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                aria-expanded="false">Admin <span class="caret"></span></a>
+                <ul class="dropdown-menu" ng-show="authenticated">
+                  <li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a
+										ui-sref="app.admin.reference" data-ui-sref-opts="{reload: true}">Acceuil</a></li>
+				<li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_ADMIN' && adminstrateur "><a ui-sref="app.admin.users" data-ui-sref-opts="{reload: true}" class="meny">utilisateurs</a></li>
+             
+            <li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a
+										ui-sref="app.admin.competences.list" data-ui-sref-opts="{reload: true}">Compétence</a></li>
+       		 <li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a ui-sref="app.candidatesList" data-ui-sref-opts="{reload: true}" class="meny">Liste des candidats</a></li>
+            <li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a ui-sref="app.admin.jobs.JobsAdminOffreCtrl" data-ui-sref-opts="{reload: true}" class="meny">Candidats postulants</a></li>
+                  
+                  <!-- <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li> -->
+                </ul>
+              </li>
+              
+              <li class="dropdown" ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_CANDIDAT'">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                aria-expanded="false">Mon espace <span class="caret"></span></a>
+                <ul class="dropdown-menu" ng-show="authenticated">
+                   <li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_CANDIDAT'"><a ui-sref="app.profile" data-ui-sref-opts="{reload: true}" >Mes informations</a></li>
+                   <li ui-sref-active="active" ng-show="authenticated && connectedRole =='ROLE_CANDIDAT'"><a ui-sref="app.applies" data-ui-sref-opts="{reload: true}" >Mes candidatures</a></li>
+                </ul>
+              </li>
+              
+               <li ui-sref-active="active"><a ui-sref="app.contact" >Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" >
+                          <!-- <li ui-sref-active="active" ng-show="!authenticated"><a ui-sref="app.login">Connexion</a></li>
+                          <li ng-show="authenticated"><a ui-sref="app.login" logout>Déconnexion</a></li>  --> 
+                          <li>
+                             <a id="loggin" href="" ng-show="authenticated" style="text-transform: lowercase;"><span>{{ $storage.username }} <i class="fa fa-user" aria-hidden="true"></i></span></a>   
+                          </li>    			
+			              <li class="dropdown open">
+			              
+			                 <!-- onclick="javascript:document.getElementById('login-dp').style.display='block'" -->
+			              
+			              	<a href=""  class="dropdown-toggle" data-toggle="dropdown" id="drpper" ui-sref="app.login">
+					              <!-- <img id="img" alt="" src="images/option-icon.png"/> -->
+					              <span ng-show="!authenticated"  style="text-transform: lowercase;">
+					              		connexion <i class="fa fa-sign-in" aria-hidden="true" ></i> 
+					              </span>
+					              <span ng-show="authenticated" logout style="text-transform: lowercase;">
+				             				déconnexion <i class="fa fa-sign-out" aria-hidden="true"></i>
+					              </span>
+			                 </a>
+				       
+						<ul id="login-dp" class="dropdown-menu">
+							<li>
+							     <div class="clearfix"  ng-show="authenticated" >
+							        <img style="width: 50px;max-width: 50px;height: 50px;max-height: 50px;" class="img-circle" check-image  ng-src="/fileUpload/{{ $storage.photo }}" >
+							        <span style="color: black; float: right;padding-right:20%;">{{ $storage.lastname }} {{ $storage.name }} </span><br/>	<!-- /uploadFile  -->						
+							        <br/>
+							        <!-- <div class="pull-left"><a href="" class="noneDeco" ui-sref="app.pass">Changer le mot de passe</a></div> -->
+							        <!-- <div class="pull-left"><a href="" class="noneDeco" ui-sref="app.profile"><i class="fa fa-cog" aria-hidden="true"></i> Paramétrage</a> </div> --><br/>
+							        <hr>
+							        <div><a href="" class="btn btn-block" logout>déconnexion <i class="fa fa-sign-out" aria-hidden="true"></i></a></div>
+							     </div> 
+								 <div class="row" ng-show="!authenticated" ><!--  -->
+										<div class="col-md-12">
+											<span style="color:black;">Authentification :</span> 
+											 <form class="form" role="form" ng-submit="login()" accept-charset="UTF-8" id="login-nav">
+													<div class="form-group">
+														 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+														 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email" ng-model="credentials.username" required>
+													</div>
+													<div class="form-group">
+														 <label class="sr-only" for="exampleInputPassword2">Password</label>
+														 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" ng-model="credentials.password" required>
+														  <p ng-show="loginErrors" style="color:red;">Login or password incorrect</p> 
+			                                             <div class="help-block text-right"><a href="" ng-click="forgotPassword()">mot de passe oublié ?</a></div>
+													</div>
+													<div class="form-group">
+														 <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+													</div>
+													<div class="checkbox">
+														 <label>
+														 <input type="checkbox"> Se souvenir de moi
+														 </label>
+													</div>
+											 </form>
+										</div>
+										<div class="bottom text-center">
+										<div><em>Vous êtes nouveau? <a ui-sref="app.register">Inscrivez-vous</a></em></div>
+											<!-- New here ? <a href="#"><b>Join Us</b></a> -->
+										</div>
+								 </div>
+							</li>
+						</ul>
+			        </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+  <script type="text/javascript">
+$('ul.nav li.dropdown').hover(function() {
+	  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+	}, function() {
+	  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+	});
+	
+</script>  
+      
+<script type="text/javascript">
+   
+  
+  /* $(function(){
+	  $('#login-dp').css({'display' : 'none'});
+	   
+  }); */
+  $(function(){
+	  $('#login-dp').hide();
+	  $("#drpper").click(function() {
+	    $('#login-dp').toggle();
+	   
+	    //e.preventDefault();
+	  });
+	});
+  
+  /* $(document).click(function(event) { 
+	    if(!$(event.target).is('#login-dp'))
+	    {
+	    	$('#login-dp').toggle();
+	    }
+	}); */
+  //
+  
+</script>
+      
+      <!-- menu actuel -->
+
+
+
+<!--HEADER START-->
+<!-- <header id="header" class="header-2 header-3">
+	<div class="container">
+		NAVIGATION START
+		<div class="form-group">
+			<div class="col-md-3">
+				<a href="" ui-sref="app.home"><img
+					src="images/logo/Logo-Capvalue.png" id="logocap"
+					class="col-md-3 col-xs-3" alt="Logo-Capvalue" width="100"
+					height="120"
+					style="max-width: 300px; width: 300px; height: 150;  left: 0px;" /></a>
+			</div>
+			<div class="navigation-col col-md-9">
+				<nav class="navbar navbar-inverse">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#navbar"
+							aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+					<div id="navbar" class="collapse navbar-collapse"
+						ng-controller="LoginCtrl">
+						<ul class="nav navbar-nav" id="nav">
+							<li ui-sref-active="active"><a ui-sref="app.home">Acceuil</a></li>
+							<li ui-sref-active="active"><a>Services</a>
+								<ul>
+									<li ui-sref-active="active"><a
+										ui-sref="app.prodETInfras">Production et infrastructures</a></li>
+									<li ui-sref-active="active"><a
+										ui-sref="app.ConseilExpertise">Conseil ET Expertise</a></li>
+									<li ui-sref-active="active"><a ui-sref="app.quiSommesNous">Qui
+											somme nous?</a></li>
+								</ul></li>
+							<li ui-sref-active="active"
+								ng-show="authenticated && connectedRole =='ROLE_CANDIDAT'"><a>Mon
+									espace</a>
+								<ul ng-show="authenticated">
+									<li ui-sref-active="active"
+										ng-show="authenticated && connectedRole =='ROLE_CANDIDAT'"><a
+										ui-sref="app.profile">Mes informations</a></li>
+									<li ui-sref-active="active"
+										ng-show="authenticated && connectedRole =='ROLE_CANDIDAT'"><a
+										ui-sref="app.applies">Mes candidatures</a></li>
+								</ul></li>
+							<li ui-sref-active="active"
+								ng-show="connectedRole !='ROLE_ADMIN'"><a
+								ui-sref="app.jobsList({typeContrat: null, ville: null, competence: null})"
+								data-ui-sref-opts="{reload: true}">Offres</a></li>
+							<li ui-sref-active="active"
+								ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a
+								ui-sref="app.admin.jobs.list">Offres</a></li>
+
+							<li ui-sref-active="active"
+								ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a>Administration</a>
+								<ul ng-show="authenticated">
+									<li ui-sref-active="active"
+										ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a
+										ui-sref="app.admin.references">Acceuil</a></li>
+									<li ui-sref-active="active"
+										ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a
+										ui-sref="app.admin.competences.list">Compétence</a></li>
+								</ul></li>
+
+							<li ui-sref-active="active"
+								ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a>Candidat</a>
+								<ul ng-show="authenticated">
+									<li ui-sref-active="active"
+										ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a
+										ui-sref="app.candidatesList">Liste des candidats</a></li>
+									<li ui-sref-active="active"
+										ng-show="authenticated && connectedRole =='ROLE_ADMIN'"><a
+										ui-sref="app.admin.jobs.JobsAdminOffreCtrl">Candidats
+											postulants</a></li>
+								</ul>
+							</li>
+
+							<li ui-sref-active="active"><a ui-sref="app.contact">Contact</a></li>
+							<li ui-sref-active="active" ng-show="!authenticated"><a
+								ui-sref="app.login">Login/Signup</a></li>
+							<li ng-show="authenticated"><a ui-sref="app.login" logout>Logout!</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			NAVIGATION END
+		</div>
+		USER OPTION COLUMN START
+		<div class="user-option-col">
+			<div class="thumb">
+				<div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <img src="images/user-img.png" alt="img"></button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#">Manage Account</a></li>
+          <li><a href="#">Change Password</a></li>
+          <li><a href="#">Edit Profile</a></li>
+          <li><a href="#">Log off</a></li>
+        </ul>
+      </div>
+			</div>
+			<div class="dropdown-box">
+				<div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <img src="images/option-icon-2.png" alt="img"> </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li> <a href="#" class="login-round"><i class="fa fa-sign-in"></i></a> <a href="#" class="btn-login">Log in with Jobinn</a> </li>
+          <li> <a href="#" class="login-round"><i class="fa fa-user-plus"></i></a> <a href="#" class="btn-login">Log in with Jobinn</a> </li>
+        </ul>
+      </div>
+			</div>
+		</div>
+	</div>
+	USER OPTION COLUMN END
+</header> -->
+<!--HEADER END-->

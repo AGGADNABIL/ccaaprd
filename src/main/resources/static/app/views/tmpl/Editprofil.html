@@ -1,0 +1,363 @@
+<style type="text/css">
+.conteneur {
+	float: right;
+	display: block;
+}
+
+label {
+	margin-right: 5px;
+}
+
+.picture {
+	max-width: 140px;
+	max-height: 160px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+form#upload-file-form {
+	/*
+	border: 1px dotted #ccc;
+	*/
+	border-radius: 10px;
+	padding: 10px auto !important;
+	width: 250px;
+}
+
+.pic {
+	width: 140px;
+	height: 100;
+	border-radius: 10px;
+}
+</style>
+<!--MAIN START-->
+<div id="main">
+	<!--RECENT JOB SECTION START-->
+	<section class="resumes-section padd-tb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="resumes-content">
+						<h2>Mise à jours de Mon identité</h2>
+						<div>
+
+							<div class="box">
+								<!--  ng-controller="ViewControlProfile"-->
+
+								<!-- e:/capvalue/CapRecrute/src/main/resources/static/app/apps/upload/{{candidat.photo}} -->
+								<div class="frame">
+									
+									<form id="upload-file-form" role="form">
+										<div class=" form-group picture">
+											<img check-image ng-src="fileUpload/{{ $storage.candidat.photo }}" alt="img"
+												class="pic">			<!--/uploadFile/    fileUpload/ -->
+										</div>
+										<br />
+										<div>
+											<div class="upload-box">
+												<div class="hold">
+													<a href="#">taille max 2MB</a> <span  style="float:right;"
+														class="btn-file"> Parcourir <input
+														id="upload-file-input" type="file" name="uploadfile" 
+														accept="*" />
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="btn-row">
+												   <a style="margin: 0px 4px;padding: 5px auto;padding-top: 14px;padding-bottom: 14px;" class="resume" href="" ng-click="loadpage()">télécharger le fichier</a>
+											    </div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="text-box">
+
+									<form>
+
+										<input type="hidden" ng-model="$storage.candidat.username" />
+										<div class="form-group">
+											<label for="nom">Nom :</label> <input type="text"
+												class="form-control" id="nom" placeholder="Entrez votre nom"
+												ng-model="$storage.candidat.nom">
+										</div>
+										<div class="form-group">
+											<label for="prenom">Prénom :</label> <input type="text"
+												class="form-control" id="prenom"
+												placeholder="Entrez votre prénom" ng-model="$storage.candidat.prenom">
+										</div>
+										<div class="form-group">
+											<label for="profile">Profile :</label> <input type="text"
+												class="form-control" id="profile"
+												placeholder="Entrez votre profile"
+												ng-model="$storage.candidat.profil">
+										</div>
+										<div class="form-group">
+											<label for="exper">Expérience :</label> 
+											<!-- <input type="text"
+												class="form-control" id="exper"
+												placeholder="Expérience (Ex : 8 ans)"
+												ng-model="candidat.niveauExperience"> -->
+												    <select ng-model="$storage.candidat.niveauExperience">
+													  <option  ng-repeat="exper in $storage.experiences " value="{{exper}} ">{{ exper }}</option>
+													  
+													</select>
+															
+										</div>
+										<div class="form-group">
+											<label for="exper">Niveau D'étude :</label> 
+											<!-- <input type="text"
+												class="form-control" id="exper"
+												placeholder="Expérience (Ex : 8 ans)"
+												ng-model="candidat.niveauExperience"> -->
+												    <select ng-model="$storage.candidat.niveauEtude">
+													  <option ng-selected="{{ niv==candidat.niveauEtude }}" ng-repeat="niv in $storage.nivs" value="{{niv}}" >{{niv}} </option>
+													</select>		
+										</div>
+										<div class="form-group">
+											<label>Situation Actuelle :</label> 
+												    <select ng-model="$storage.candidat.situationActuelle">
+													  <option ng-selected="{{ sit==candidat.situationActuelle }}" ng-repeat="sit in $storage.situations" value="{{sit}}" >{{ sit }}</option>
+													</select>		
+										</div>
+										
+										<!-- <div class="form-group">
+											<label for="etat">Etat Civile :</label> <input type="text"
+												class="form-control" id="etat" placeholder=""
+												ng-model="candidat.situationActuelle">
+										</div> -->
+										
+										<div class="form-group">
+											<label for="tel">Téléphone (GSM) :</label>
+											
+											 <input type="text"
+												class="form-control" id="tel" 
+												ng-model="$storage.candidat.telephone">
+										</div>
+									
+										<div class="form-group">
+											<label for="dateNaiss" class="control-label">Date de naissance :</label>
+											 <div>
+												<input type="date" data-polyfill="all"
+													class="form-control"
+													placeholder="Date de Naissance" ng-model="$storage.candidat.dateNaiss" value="{{ $storage.candidat.dateNaiss | date:'dd-MM-yyyy' }}" />
+											</div>
+												
+											<!-- <div class="form-group">
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+													<select ng-model="dayNaiss">
+														<option>Séléctionner le jour</option>
+														<option ng-repeat="day in naissDays"
+															ng-selected="{{day==dayNaiss}}" value="{{day}}">
+															{{day}}</option>
+													</select>
+												</div>
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+													<select ng-model="monthNaiss">
+														<option>Séléctionner le mois</option>
+														<option ng-repeat="month in naissMonths"
+															ng-selected="{{ ($index+1)==monthNaiss}}"
+															value="{{ $index + 1 }}">{{ month }}</option>
+													</select>
+												</div>
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+													<select ng-model="yearNaiss">
+														<option>Séléctionner l'année</option>
+														<option ng-repeat="year in naissYears"
+															ng-selected="{{year==yearNaiss}}" value="{{year}}">
+															{{ year }}</option>
+													</select>
+												</div>
+											</div> -->
+										</div>
+										<div class="form-group">
+											<label for="national">Payer :</label> <input
+												type="text" class="form-control" id="national"
+											    ng-model="$storage.candidat.nationalite">
+										</div>
+										<div class="form-group">
+											<label for="adr">Ville :</label> <input type="text"
+												class="form-control" id="adr" placeholder=""
+												ng-model="$storage.candidat.adresse">
+										</div>
+										<div class="form-group">
+											<label for="sal">Tarif journalier :</label> <input type="text"
+												class="form-control" id="tarif"
+												placeholder="Salaire en Dirham" ng-model="$storage.candidat.salaire">
+										</div>
+										<hr>
+										
+										<div class="form-group">
+										
+											<label for="disp" class="control-label">Date de Disponibilité :</label>
+											 <div>
+												<input type="date" data-polyfill="all" id="disp"
+													class="form-control"
+													placeholder="Date de Naissance" ng-model="$storage.candidat.dateDisponibilite" value="{{ $storage.candidat.dateDisponibilite }}"/>
+											</div>
+											
+											<!-- <label for="disp">Date de Disponibilité :</label>
+											<input type="date" data-polyfill="all"
+												class="form-control" id="tarif"
+												placeholder="Salaire en Dirham" ng-model="$storage.candidat.dateDisponibilite">
+											<div class="form-group"> -->
+													
+												<!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+													<select ng-model="dayDisp">
+														<option ng-repeat="dayD in dispDays"
+															ng-selected="{{ dayD == dayDisp }}" value="{{ dayD }}">
+															{{ dayD }}</option>
+													</select>
+												</div>
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+													<select ng-model="monthDisp">
+														<option ng-repeat="monthD in dispMonths"
+															ng-selected="{{ ($index+1)==monthDisp }}"
+															value="{{ $index + 1 }}">{{ monthD }}</option>
+													</select>
+
+												</div>
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+													<select ng-model="yearDisp">
+														<option ng-repeat="yearD in naissYears"
+															ng-selected="{{yearD == yearDisp}}" value="{{yearD }}">
+															{{ yearD }}</option>
+													</select>
+
+												</div> -->
+
+											</div>
+											<br/>
+											
+											
+											<!-- <input type="text" class="form-control" id="disp" placeholder="Salaire en Dirham" ng-model="candidat.dateDisponibilite"> -->
+										
+										<div class="form-group well">
+											
+												<input type="checkbox"
+													id="notification"
+													ng-model="$storage.candidat.notification"/>
+													<label for="notification">En cochant cette case, je refuse de recevoir les derniers offres d'emplois par e-mail.</label>
+											
+											
+										</div>
+										</form>
+										</div>
+										<div class="conteneur">
+											<div class="btn-row" ng-controller="ProfileCtrl">
+												<a class="resume" href="" ng-click="updateCandidat()"><i
+													class="fa fa-file-text-o"></i>Sauvegarder</a>
+											</div>
+											<br>
+										</div>
+										<br/>
+										<hr>
+									
+									<div class="clearfix">
+									<div class="row">
+										<div class="col-lg-3"></div>
+										<div class="col-lg-6">
+											<label>Fichier joints (Votre CV :taille moins de
+												2Mo): </label>
+											<div class="form-group">
+												
+												<form id="upload-cv-form" role="form">
+													<div>
+														<div class="upload-box">
+															<div class="hold">
+																<a href="#">taille max 2 MB</a> <span
+																	class="btn-file"> Parcourir <input
+																	id="upload-cv-input" type="file" name="uploadfile"
+																	accept="application/pdf,application/msword" />
+																</span>
+															</div>
+														</div>
+													</div>
+
+												</form>
+											</div>
+										</div>
+									</div>
+									</div>
+								</div>
+								<br>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+	</section>
+	<!--RECENT JOB SECTION END-->
+	<!-- EDIT INFORMATION -->
+
+</div>
+<script>
+	$(document).ready(function() {
+		// pour faire un click sur bouton submit
+		/* $("#upload-file-form")
+				.submit(uploadFile); */
+		// pour changement d'etat 
+		$("#upload-file-input").on("change", uploadFile);
+		$("#upload-cv-input").on("change", uploadCV);
+	});
+
+	function uploadFile() {
+
+		$.ajax({
+			url : "/uploadFile", //    /recruteCapvalue
+			type : "POST",
+			data : new FormData($("#upload-file-form")[0]),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				// Handle upload success
+				$("#upload-file-message").text();
+				console.log(data);
+				//"File succesfully uploaded");
+			},
+			error : function() {
+				// Handle upload error
+				$("#upload-file-message").text();
+				//	"File not uploaded (perhaps it's too much big)");
+			}
+		});
+	};
+	// function uploadFile
+	function uploadCV() {
+
+		$.ajax({
+			url : "/uploadCv", //     /recruteCapvalue
+			type : "POST",
+			data : new FormData($("#upload-cv-form")[0]),
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false,
+			success : function() {
+				// Handle upload success
+				console.log("success");
+				//$("#upload-cv-message").text();
+				//"File succesfully uploaded");
+			},
+			error : function() {
+				// Handle upload error
+				console.log("error ");
+				//$("#upload-cv-message").text();
+				//	"File not uploaded (perhaps it's too much big)");
+			}
+		});
+	}
+	
+	
+</script>
+<!--MAIN END-->
+<!-- <script src="../../scripts/form.js"></script> -->

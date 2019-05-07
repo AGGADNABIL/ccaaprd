@@ -1,0 +1,99 @@
+<style>
+  .ng-table-pager {
+    display: none;
+  }
+  .label {
+    font-size: 10px;font-weight: 400; text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    padding: .2em .6em .3em;"
+  }
+  .bg-success {
+    background-color: #5cb85c !important;
+    color: white !important;
+  }
+  .bg-lightred {
+    background-color: #e05d6f !important;
+    color: white !important;
+  }
+</style>
+<!--MAIN START-->
+<div id="main" ng-controller="JobsListAdminCtrl">
+  <!--RECENT JOB SECTION START-->
+  <section class="recent-row padd-tb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div id="content-area" style="width:100% !important;">
+
+            <form>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+                  <input type="text" class="form-control" placeholder="Search..." ng-model="searchQuery">
+
+                </div>
+              </div>
+            </form>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <span class="lead">Liste des offres</span>
+               <!-- <div class="row pull-right">
+								 <div class="dropdown">
+								     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								         <i class=""></i>Export table to...
+								         <span class="caret"></span>
+								     </button>
+								     <ul class="table-export dropdown-menu" table-selector="'table'"  aria-labelledby="dropdownMenu1">
+								          export-options="{type: 'pdf', escape: true, ignoreColumn : '[3,4]', tableName: 'Aanhefs' }" 
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'pdf',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_Offres'} );">PDF</a>
+								         </li>
+								
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'excel',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_Offres'});">Excel</a>
+								         </li>
+								
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'csv',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_Offres'});">CSV</a>
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'xml',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_Offres'});">XML</a>
+								         </li>
+								         <li>
+								             <a href="" onClick ="$('#tableID').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]',tableName: 'Liste_Offres'});">JSON</a>
+								         </li>
+								     </ul>
+								 </div>
+							 </div> -->
+              </div>
+            
+                      <table infinite-scroll="getMoreData()" ng-table="tableParams" class="table table-bordered table-striped table-condensed">
+                <tr id="entry_{{entry.codeOffre}}" ng-repeat="entry in data | orderBy:sortType:sortReverse | filter:searchQuery |orderBy:'-dateCreation'" >
+                    <td  data-title="'Titre'" sortable="'titre'" style="max-width: 300px;">
+                    <strong>{{entry.titre}}</strong>
+                  </td>
+                  <td data-title="'Date de publication'" sortable="'datePublication'">
+                    {{entry.datePublication | date : 'yyyy-MM-dd '}}
+                  </td>
+                 
+                 
+                  
+                  
+                  <td data-title="'Candidats Postulé'" >  
+                    <button class="btn btn-default btn-sm" ng-click="consulter(entry.codeOffre)">Consulter</button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--RECENT JOB SECTION END-->
+</div>
+<!--MAIN END-->
+

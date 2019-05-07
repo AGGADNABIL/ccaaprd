@@ -1,0 +1,98 @@
+<style type="text/css">
+.conteneur {
+	float: right;
+	display: block;
+}
+
+label {
+	margin-right: 5px;
+}
+
+.picture {
+	max-width: 140px;
+	max-height: 160px;
+	margin: 10px 20px 5px 0px;
+	padding: auto;
+	border:  1px dotted red;
+	overflow: hidden;
+   
+}
+
+form {
+border : 1px dotted #ccc;
+border-radius: 10px;
+padding: auto auto !important ;
+
+}
+
+.pic {
+	width: 140px;
+	height: 100px;
+	border:  1px dotted #ccc;
+	
+}
+
+</style>
+<!--MAIN START-->
+<div>
+	<!--RECENT JOB SECTION START-->
+	
+
+	<div id="jcl-demo" style="padding:auto !important;">
+    <div class="custom-container default" style="padding:auto !important;">
+        <a href="#" class="prev">&lsaquo;</a>
+        <div class="carousel">
+            <ul>
+                <li ng-repeat="ref in references">
+               <!--  <div class="picture"> -->
+               		 <img  ng-src="images/{{ ref.reference }}">
+               	<!-- </div> -->
+                </li>
+            </ul>
+        </div>
+        <a href="#" class="next">&rsaquo;</a>
+        <div class="clear"></div>
+    </div>
+  </div>
+    <script type="text/javascript">
+        $(function() {
+            $(".default .carousel").jCarouselLite({
+                btnNext: ".default .next",
+                btnPrev: ".default .prev"
+            });
+        });
+    </script>
+	
+
+	
+	
+	<!--RECENT JOB SECTION END-->
+	<!-- EDIT INFORMATION -->
+	<section>
+		<form ng-submit="submitscholarshipForm()">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-4">
+						<input type="text"
+							placeholder="Enter Job Title, Skills or Company">
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<input type="text"
+							placeholder="Enter City, State, Province or Country">
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<input type="text" placeholder="Category">
+					</div>
+					<div class="col-md-1 col-sm-1">
+						<button type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</section>
+</div>
+<!--MAIN END-->
+<!-- <script src="../../scripts/form.js"></script> -->

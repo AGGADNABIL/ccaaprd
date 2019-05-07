@@ -1,0 +1,85 @@
+<!--INNER BANNER START-->
+<section id="inner-banner">
+	<div class="container">
+		<h1>Contact us</h1>
+	</div>
+</section>
+<!--INNER BANNER END-->
+<style type="text/css">
+
+textarea {
+	 border: 1px solide #ccc !important;
+	 height: 120px !important;
+}
+  
+</style>
+
+<!--MAIN START-->
+<div id="main">
+
+	<!--CONTACT US START-->
+	<section class="contact-section">
+		<div class="map-box">
+			<div id="map_contact_4" class="map_canvas active">
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1661.7236264900916!2d-7.602794170860749!3d33.59369811294446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d2de23236691%3A0xee3ce6ce49ef08ff!2sCAPVALUE!5e0!3m2!1sfr!2sfr!4v1468425057202"
+					height="460" frameborder="0" style="border: 0;width: 100%;max-width: 100%;"
+					allowfullscreen></iframe>
+			</div>
+
+
+
+
+
+			<div class="contact-form padd-tb">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-md-9 col-sm-8 " id="decalage-haut">
+							<h2>Remarques ou suggestions</h2>
+							<form method="post">
+								<div class="row">
+									<div class="col-md-6">
+										<input name="name" required pattern="[a-zA-Z ]+" type="text"
+											placeholder="Nom" ng-model="contacter.username">
+									</div>
+
+									<div class="col-md-6">
+										<input name="subject" required type="text" placeholder="Sujet"
+											ng-model="contacter.subject">
+									</div>
+									<div class="col-md-12">
+										<textarea name="comments" required cols="10" 
+											placeholder="message" ng-model="contacter.message"></textarea>
+									</div>
+
+									<div class="col-md-12">
+										<input name="valider" type="submit" value="Envoyer"
+											ng-click="envoyer()">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-3 col-sm-4">
+							<div class="address-box">
+								<address>
+									<ul>
+										<li><i class="fa fa-phone"></i> <strong>+212 522
+												240 353</strong> <strong>+212 522 240 358</strong></li>
+										<li><i class="fa fa-envelope-o"></i> <a href="mailto:">capvalue@gmail.com</a>
+										</li>
+										<li><i class="fa fa-globe"></i> <a href="#">www.capvalue.net</a>
+										</li>
+									</ul>
+								</address>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--CONTACT US END-->
+
+</div>
+<!--MAIN END-->

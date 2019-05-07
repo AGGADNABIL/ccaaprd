@@ -1,0 +1,150 @@
+<style type="text/css">
+
+.signup-section {
+  padding-top: 40px;
+  
+}
+.holder {
+padding: 20px 30px 30px 30px !important;
+}
+
+
+</style>
+
+<section class="signup-section">
+
+	<div class="container"><!-- ng-controller="PrincipalCtrl" -->
+	<hr/>
+		<div class="row" ><!-- ng-controller="NosInfosCtrl" -->
+			<!-- ng-controller="NosInformationCtrl" -->
+			<div class="col-md-10 col-sm-10">
+				<div class="resumes-content">
+					<div class="panel-heading">
+						<form class="form-horizontal" role="form">
+							<h2>Nouveau compte administrateur :</h2>
+							<span class="lead pull-right"><button slide-toggle="#usersToglle"
+									class="btn btn-primary btn-sm">
+									<span class="fa fa fa-pencil fa-lg"></span><strong>
+										Editer liste</strong>
+								</button> </span>
+						</form>
+					</div>
+					
+					<div class="box">
+					
+					<div id="usersToglle" class="slideable" style="max-height:auto !important; height: auto !important">
+					         <h4>Liste des administrateurs :</h4>
+							<table infinite-scroll="getMoreData()" ng-table="tableParams"
+								class="table table-bordered table-striped">
+								<tr id="user_{{user.codeUser}}"
+									ng-repeat="user in users">   <!-- | orderBy:sortType:sortReverse | filter:searchQuery |orderBy:'-priorite' -->
+									<td data-title="'Email'" sortable="'username'">
+									  <p>
+											{{user.username}}
+									  </p>
+									</td>
+									<td data-title="'Nom'" sortable="'nom'"
+										style="max-width: 300px;">
+										<label ng-hide="editingData[user.codeUser]">
+											{{user.nom}}	
+										</label>
+									     <input class="form-control" ng-show="editingData[user.codeUser]" type="text" ng-model="user.nom"/> 	
+									</td>
+									<td data-title="'Prenom'" sortable="'prenom'">
+										<label ng-hide="editingData[user.codeUser]">
+											{{user.prenom}}
+										</label>
+										<input class="form-control" ng-show="editingData[user.codeUser]" type="text" ng-model="user.prenom" /> 	
+									</td>
+									
+									<td data-title="'Active'" sortable="'actived'">
+									  <p>
+											<a href="" 
+													ng-click="changeEtat(user, $event, !user.actived)">
+														<span
+														ng-class="{'fa fa-unlock-alt disable':user.actived==true,'fa fa-lock enable':user.actived==false}">
+											</span></a>
+									  </p>
+									  <!-- <textarea cols="60" ng-show="isVisible" ng-model="nosInfos.contenu"></textarea> -->
+									</td>
+									
+									<td data-title="'Action'" style="width: 100px;min-width: 60px;">
+										<button class="btn btn-default btn-sm" ng-show="editingData[user.codeUser]" ng-click="update(user)">
+										 	<span class="fa fa-check"></span>
+										</button>
+										<button class="btn btn-default btn-sm"  ng-hide="editingData[user.codeUser]"	ng-click="modify(user)">
+										 	<span class="fa fa-pencil"></span>
+										</button>
+										
+										<button class="btn btn-danger btn-sm"
+											ng-click="remove(user)">
+											<span class="fa fa-trash"></span>
+										</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<form role="form" ng-submit="valider()">
+							<div class="holder">
+								  <div class="input-box"> <i class="fa fa-user"></i>
+						            <input id="firstname" name="firstname" ng-model="nom" type="text" placeholder="nom"  required >
+						          </div>
+						          
+						          <div class="input-box"> <i class="fa fa-user"></i>
+						            <input id="lastname" name="lastname" ng-model="prenom" type="text" placeholder="prénom"  required>
+						          </div>
+						          
+						          <div class="input-box"> <i class="fa fa-envelope"></i>
+						            <input id="email" name="email" ng-model="newUsername" type="email" placeholder="Email" required>
+						          </div>
+						          
+						          <div class="input-box">
+						            <a href="" id="psswrdID"><i class="fa fa-refresh"></i></a>
+						            <input id="password" name="password" ng-model="pass" type="text" 
+						                   placeholder="Mot de passe" required> 
+						          </div>
+						          
+						          <!-- <div class="input-box"> <i class="fa fa-unlock"></i>
+						            <input id="password" name="password" ng-model="password" type="password" placeholder="Mot de passe" required>
+						          </div>
+						          <div class="input-box"> <i class="fa fa-unlock"></i>
+						            <input id="passwordConfirm" name="passwordConfirm" ng-model="passwordConfirm" type="password" placeholder="Confirmer votre mot de passe" required>
+						          </div> -->
+						          <div class="check-box">
+											 <input type="submit" value="Enregistrer"/><br>
+											<!-- <p class="help-block" style="color: #ff635d; !important;display: block;">
+												<span ng-show="errors">Les mots de passe ne sont pas identiques</span>
+										  </p>
+										  <p class="help-block" style="color: #ff635d; !important;">
+												<span ng-show="emailError && !errors">{{usernameConflict}}</span>
+										  </p> -->
+									</div>
+							</div>
+							
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+</section>
+<script type="text/javascript">
+ $(function() {
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	var text="";
+	$('#psswrdID').click(function (){
+			
+		    for( var i=0; i < 8; i++ ){
+		    	  text += possible.charAt(Math.floor(Math.random() * possible.length));
+		    }
+	        $('#password').val(text);
+	        
+	        angular.element($('#password')).triggerHandler('input');
+	});
+	
+}); 
+</script>

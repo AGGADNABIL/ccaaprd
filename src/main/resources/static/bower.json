@@ -1,0 +1,78 @@
+{
+  "name": "cap.recrute",
+  "version": "0.1",
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-animate": "1.4.6",
+    "angular-bootstrap": "0.14.3",
+    "angular-cookies": "1.4.6",
+    "angular-file-upload": "~2.1.4",
+    "angular-fontawesome": "~0.4.0",
+    "angular-loading-bar": "~0.8.0",
+    "angular-messages": "1.4.6",
+    "angular-resource": "1.4.6",
+    "angular-sanitize": "1.4.6",
+    "angular-touch": "1.4.6",
+    "angular-ui-router": "~0.2.15",
+    "angular-ui-select": "~0.12.1",
+    "animate.css": "~3.4.0",
+    "bootstrap": "~3.3.5",
+    "bootstrap-daterangepicker": "~2.0.11",
+    "font-awesome": "~4.4.0",
+    "json3": "~3.3.2",
+    "ng-bs-daterangepicker": "~0.0.5",
+    "oclazyload": "~1.0.5",
+    "owl-carousel": "~1.3.2",
+    "ng-table": "^0.8.3",
+    "angular-sweetalert": "angular-h-sweetalert#^1.4.7",
+    "sweetalert2": "^4.0.3",
+    "ngstorage": "^0.3.10",
+    "time-duration-picker": "^0.1.4",
+    "angular-ui-bootstrap-datetimepicker": "^1.3.3",
+    "textAngular": "^1.5.1",
+    "froala-wysiwyg-editor": "froala#^2.3.2",
+    "angular-froala": "^2.3.2",
+    "ngQuill": "ngquill#^1.5.1",
+    "angular-trix": "^1.0.2",
+    "angular-ckeditor": "^1.0.3",
+    "angular-ui-tinymce": "^0.0.16",
+    "ng-tags-input": "3.1.1",
+    "ngListSelect": "*"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.16",
+    "angular-scenario": "1.2.16",
+    "angular-filter": "^0.5.11",
+    "file-saver": "^1.3.2",
+    "angular-export-table": "*"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "./dist/css/bootstrap.css",
+        "./dist/js/bootstrap.min.js"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.min.css"
+      ]
+    },
+    "owl-carousel": {
+      "main": [
+        "./owl-carousel/owl.carousel.min.js",
+        "./owl-carousel/owl.carousel.css",
+        "./owl-carousel/owl.theme.css"
+      ]
+    }
+  },
+  "appPath": "app",
+  "resolutions": {
+    "angular": "~1.4.6",
+    "bootstrap": "~3.3.5",
+    "jquery": ">= 1.9.0",
+    "bootstrap-daterangepicker": "~2.0.11",
+    "angular-bootstrap": ">=1.2.4",
+    "font-awesome": "~4.4.0"
+  }
+}
